@@ -34,6 +34,8 @@ namespace DolphinCove.Models
 
         public string? PhoneNumber { get; set; }
 
+        public string EmailAddress { get; set; }
+
 
 
 
