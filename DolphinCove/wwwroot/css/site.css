@@ -20,3 +20,206 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.right-section {
+    width: 325px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.make-reservation-text-container {
+    background-color: #39A4AC;
+    border-radius: 5px 5px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 15px;
+}
+
+.make-reservation-text-container h1 {
+    font-size: 15px;
+    color: #ffffff;
+    font-weight: 700;
+    
+    margin: 0px;
+}
+
+.form-wrapper {
+    border-radius: 0px 0px 5px 5px;
+    border: 2px solid #39A4AC;
+    padding: 20px;
+}
+
+.form-wrapper2 {
+    position: relative;
+    top: 40%;
+    left: 0;
+}
+
+.fa-map-marker, .fa-calendar, .fa-user-friends {
+    color: #39A4AC;
+}
+
+.choose-location{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+#choose-location-text, #lblDate, #lblSchedule, #lblParticipants, #lblActivity {
+    font-size: 14px;
+    color: #39A4AC;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.choose-loc-cont {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+#location-name {
+    border: 1px solid lightgray;
+    outline: none;
+}
+
+#location-name:hover {
+    border: 1px solid #39A4AC;
+}
+
+#sel-loc{
+    color: green;
+    font-size: 14px;
+}
+
+.schedule-date{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.choose-activity{
+    margin-bottom: 15px;
+    display: none;
+}
+
+
+
+
+
+
+/*Testing Section*/
+.select-location-box-part {
+    border: 1px solid #B6B5B575;
+    border-radius: 3px;
+    cursor: pointer;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+}
+
+.select-location-box-part:hover {
+    border: 1px solid #39A4AC;
+    border-radius: 3px;
+}
+
+.select-location-box-part span{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.select-location-box-part span p{
+    margin: 0px;
+    font-size: 13px;
+    color: #B6B5B575;
+}
+
+.fa-caret-down {
+    color: #B6B5B575;
+}
+
+/*#overlay-div {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 19%;*/
+    /*top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;*/
+    /*background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+}*/
+
+#overlay-div {
+    position: fixed;
+    top: 19%;
+    left: 5.5%;
+    z-index: 10;
+    background-color: #ffffff;
+    color: white;
+    visibility: hidden;
+    width: 31%;
+    height: inherit;
+    border-radius: 5px;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #39A4AC;
+}
+
+
+#closeBtn{
+    background-color: inherit;
+    border: none;
+    outline: none;
+
+}
+
+.fa-times {
+    color: #39A4AC;
+}
+
+.overlay-choose-location {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.overlay-choose-location p{
+    color: #818181;
+    margin: 0px;
+    font-size: 15px;
+}
+
+.radio-location{
+    color: #818181;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    width: 40%
+}
+
+.radio-location input{
+    margin-bottom: 20px;
+}
+
+.radbtn{
+    display: flex;
+    align-items: center;
+    width: 200px;
+}
+
+    .radbtn#text{
+        width: 100%;
+    }
+
+    .radbtn input {
+        margin: 0px 10px 0px 0px;
+        display: flex;
+        align-items: center;
+    }

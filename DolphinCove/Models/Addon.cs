@@ -12,5 +12,7 @@ namespace DolphinCove.Models
 
         [Required]
         public decimal AddonPrice { get; set; }
+
+        public string AddonImage1 { get; set; }
     }
 }

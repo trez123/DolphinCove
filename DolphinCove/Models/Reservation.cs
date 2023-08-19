@@ -62,5 +62,10 @@ namespace DolphinCove.Models
         [ForeignKey("CruiseId")]
         public virtual Cruise? Cruise { get; set; }
 
+
+        public int? ParkId { get; set; }
+        [ForeignKey("ParkId")]
+        public virtual Park? Park { get; set; }
+
     }
 }

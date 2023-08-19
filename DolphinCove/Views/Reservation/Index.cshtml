@@ -1,0 +1,180 @@
+﻿@model IEnumerable<DolphinCove.Models.Park>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div class="right-section">
+    @*<form asp-action="" method="post" id="" class="form-wrapper2">*@
+        <div class="make-reservation-text-container">
+            <h1>MAKE YOUR RESERVATION</h1>
+        </div>
+        <div class="form-wrapper">
+            <div class="choose-location">
+                <div class="choose-loc-cont">
+                    <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
+                    <label id="choose-location-text">Choose the location</label>
+                </div>
+
+                
+
+                <div class="select-location-box-part">
+                    
+                        <span>
+                        <p>Select location</p>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </span>
+                    
+
+                </div>
+                <div id="overlay-div">
+                    <div class="overlay-choose-location">
+                        <p>Choose the Location</p>
+                        <button type="submit" id="closeBtn" onclick="closeDiv()">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <div class="radio-location">
+                        @foreach (var park in Model)
+                        {
+                            <div class="radbtn">
+                                <input type="radio" name="SelectedPark" value="@park.Id" /> @park.ParkName
+                            </div>
+                        }
+                    </div>
+                    
+                </div>
+
+               @* <div >
+                    <h1>This is an overlay</h1> 
+                    <p>You can close this by clicking anywhere</p>
+                </div>*@
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            @*<div class="choose-location">
+                <div class="choose-loc-cont">
+                    <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
+                    <label id="choose-location-text">Choose the location</label>
+                </div>
+                <div>
+                    <!--asp-for="" after select-->
+                    <select asp-for="ParkId" asp-items="@ViewBag.ParkNameDropdown" class="form-control" id="location-name">
+                        <option selected disabled id="sel-loc">Select location</option>
+                    </select>
+                </div>
+            </div>*@
+
+            @*<div class="choose-activity">
+                <div class="choose-loc-cont">
+                    <i class="fa-solid fa-location-arrow fa-lg" aria-hidden="true"></i>
+                    <label id="lblActivity">Choose the activity</label>
+                </div>
+                <div>
+                    <!--asp-for="" after select-->
+                    <select asp-for="ExperienceId" asp-items="@ViewBag.ExperienceNameDropdown" class="form-control" id="activity-name">
+                        <option selected disabled id="sel-loc">Select Activity</option>
+                    </select>
+                </div>
+            </div>*@
+
+            <div class="schedule-date">
+                <div class="select-date">
+                    <div class="choose-loc-cont">
+                        <i class="fa fa-calendar fa-lg" aria-hidden="true"></i>
+                        <label id="lblDate">Date</label>
+                    </div>
+                    <div>
+                        <!--asp-for="" after select-->
+                        @*<select asp-items="@ViewBag.VisitorNameDropdown" class="form-control" id="select-date-name">
+                            <option selected disabled id="sel-loc">- - Choose - -</option>
+                        </select>*@
+                        <input type="date" />
+                    </div>
+                </div>
+
+                <div class="select-schedule">
+                    <div class="choose-loc-cont">
+                        <i class="fas fa-clock fa-lg" aria-hidden="true"></i>
+                        <label id="lblSchedule">Schedule</label>
+                    </div>
+                    <div>
+                        <!--asp-for="" after select-->
+                        <select asp-items="@ViewBag.VisitorNameDropdown" class="form-control" id="select-date-name">
+                            <option selected disabled id="sel-loc">- - Choose - -</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="select-partipants">
+                <div class="choose-loc-cont">
+                    <i class="fas fa-user-friends fa-lg" aria-hidden="true"></i>
+                    <label id="lblParticipants">Participants</label>
+                </div>
+                <div>
+                    <!--asp-for="" after select-->
+                    <select asp-items="@ViewBag.VisitorNameDropdown" class="form-control" id="participants-name">
+                        <option selected disabled id="sel-loc">2 Adults</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    @*</form>*@
+
+    <div></div>
+</div>
+
+
+@*<div class="main-reservation-form">
+    <div>
+        <h1 class="text-center">MAKE YOUR RESRVATION</h1>
+    </div>
+
+    <div>
+        <span>
+
+            <p>Choose the location</p>
+        </span>
+    </div>
+</div>*@
+
+@section Scripts{
+    <script>
+        //function on() {
+        //    document.getElementById("overlay-div").style.display = "block";
+        //}
+
+        //function off() {
+        //    document.getElementById("overlay-div").style.display = "none";
+        //}
+
+        var content = document.querySelector(".select-location-box-part");
+        var overlay = document.querySelector("#overlay-div");
+
+        content.addEventListener("click", function () {
+            if (overlay.style.visibility === "hidden") { 
+                overlay.style.visibility = "visible"; 
+            }
+            else { 
+                overlay.style.visibility = "hidden"; 
+            }
+        });
+        
+
+        function closeDiv() {
+            document.getElementById("overlay-div").style.display = "none";
+        }
+    </script>
+}

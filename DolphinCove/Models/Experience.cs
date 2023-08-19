@@ -12,5 +12,13 @@ namespace DolphinCove.Models
 
         [Required]
         public decimal ExperiencePrice { get; set; }
+
+        public string ExperienceImage1 { get; set; }
+
+        public string? ExperienceImage2 { get; set; }
+
+        public string? ExperienceImage3 { get; set; }
+
+        public string? ExperienceImage4 { get; set; }
     }
 }
