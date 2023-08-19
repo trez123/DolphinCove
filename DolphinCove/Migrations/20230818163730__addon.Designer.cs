@@ -4,6 +4,7 @@ using DolphinCove.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,16 +12,17 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DolphinCove.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230818163730__addon")]
+    partial class _addon
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("DolphinCove.Models.Addon", b =>
                 {
@@ -28,7 +30,7 @@ namespace DolphinCove.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("AddonImage1")
                         .IsRequired()
@@ -43,7 +45,7 @@ namespace DolphinCove.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addons", (string)null);
+                    b.ToTable("Addons");
                 });
 
             modelBuilder.Entity("DolphinCove.Models.Cruise", b =>
@@ -52,7 +54,7 @@ namespace DolphinCove.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CruiseName")
                         .IsRequired()
@@ -60,7 +62,7 @@ namespace DolphinCove.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cruises", (string)null);
+                    b.ToTable("Cruises");
                 });
 
             modelBuilder.Entity("DolphinCove.Models.Experience", b =>
@@ -69,7 +71,7 @@ namespace DolphinCove.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ExperienceImage1")
                         .IsRequired()
@@ -93,7 +95,7 @@ namespace DolphinCove.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Experiences", (string)null);
+                    b.ToTable("Experiences");
                 });
 
             modelBuilder.Entity("DolphinCove.Models.Park", b =>
@@ -102,7 +104,7 @@ namespace DolphinCove.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int?>("ExperienceId1")
                         .HasColumnType("int");
@@ -150,7 +152,7 @@ namespace DolphinCove.Migrations
 
                     b.HasIndex("ExperienceId8");
 
-                    b.ToTable("Parks", (string)null);
+                    b.ToTable("Parks");
                 });
 
             modelBuilder.Entity("DolphinCove.Models.PromotionCode", b =>
@@ -159,7 +161,7 @@ namespace DolphinCove.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("PromoCode")
                         .IsRequired()
@@ -170,7 +172,7 @@ namespace DolphinCove.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PromotionCodes", (string)null);
+                    b.ToTable("PromotionCodes");
                 });
 
             modelBuilder.Entity("DolphinCove.Models.Reservation", b =>
@@ -179,7 +181,7 @@ namespace DolphinCove.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int?>("AddonId")
                         .HasColumnType("int");
@@ -246,7 +248,7 @@ namespace DolphinCove.Migrations
 
                     b.HasIndex("PromotionCodeId");
 
-                    b.ToTable("Reservations", (string)null);
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("DolphinCove.Models.Park", b =>

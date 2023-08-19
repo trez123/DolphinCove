@@ -13,8 +13,8 @@ namespace DolphinCove.Models
         [Required]
         public decimal ExperiencePrice { get; set; }
 
-        [Required]
-        public string ExperienceImage1 { get; set; }
+        //[Required]    // wont save if required idk why 0_0
+        public string? ExperienceImage1 { get; set; }
 
         public string? ExperienceImage2 { get; set; }
 
@@ -23,3 +23,4 @@ namespace DolphinCove.Models
         public string? ExperienceImage4 { get; set; }
     }
 }
+
