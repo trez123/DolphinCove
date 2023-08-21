@@ -17,6 +17,10 @@ namespace DolphinCove.Controllers
             _dbx = dbx;
         }
 
+
+        
+
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -50,5 +54,32 @@ namespace DolphinCove.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public IActionResult GetExperienceNames(int selectedParkId)
+        {
+            var selectedPark = _dbx.Parks.Include(p => p.Experience1).
+                Include(p => p.Experience2).Include(p => p.Experience3).
+                Include(p => p.Experience4).Include(p => p.Experience5).
+                FirstOrDefault(p => p.Id == selectedParkId);
+            if (selectedPark != null)
+            {
+                var experienceNames = new List<string>
+                {
+                    selectedPark.Experience1?.ExperienceName,
+                    selectedPark.Experience2?.ExperienceName,
+                    selectedPark.Experience3?.ExperienceName,
+                    selectedPark.Experience4?.ExperienceName,
+                    selectedPark.Experience5?.ExperienceName
+                };
+
+                return Json(experienceNames);
+            }
+
+            return BadRequest();
+        }
+
+
     }
+
 }

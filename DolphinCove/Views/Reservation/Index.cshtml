@@ -28,29 +28,28 @@
                     
 
                 </div>
-                <div id="overlay-div">
-                    <div class="overlay-choose-location">
-                        <p>Choose the Location</p>
-                        <button type="submit" id="closeBtn" onclick="closeDiv()">
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                        </button>
-                    </div>
+                <div id="overlay-div" style="display: none;">
+                        <div class="overlay-choose-location">
+                            <p>Choose the Location</p>
+                            <button>
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                        </div>
 
-                    <div class="radio-location">
-                        @foreach (var park in Model)
-                        {
-                            <div class="radbtn">
-                                <input type="radio" name="SelectedPark" value="@park.Id" /> @park.ParkName
-                            </div>
-                        }
-                    </div>
-                    
+                        <div class="radio-location">
+                            @foreach (var park in Model)
+                            {
+                                <div class="radbtn">
+                                    <input type="radio" name="selectedParkId" value="@park.Id" /> @park.ParkName
+                                </div>
+                            }
+                        </div>
+
+                    <button id="getExperienceButton">Select Location</button>
+                    <div id="experienceNamesContainer"></div>
+                
+                
                 </div>
-
-               @* <div >
-                    <h1>This is an overlay</h1> 
-                    <p>You can close this by clicking anywhere</p>
-                </div>*@
             </div>
 
 
@@ -58,23 +57,6 @@
 
 
 
-
-
-
-
-
-            @*<div class="choose-location">
-                <div class="choose-loc-cont">
-                    <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
-                    <label id="choose-location-text">Choose the location</label>
-                </div>
-                <div>
-                    <!--asp-for="" after select-->
-                    <select asp-for="ParkId" asp-items="@ViewBag.ParkNameDropdown" class="form-control" id="location-name">
-                        <option selected disabled id="sel-loc">Select location</option>
-                    </select>
-                </div>
-            </div>*@
 
             @*<div class="choose-activity">
                 <div class="choose-loc-cont">
@@ -137,44 +119,37 @@
 </div>
 
 
-@*<div class="main-reservation-form">
-    <div>
-        <h1 class="text-center">MAKE YOUR RESRVATION</h1>
-    </div>
-
-    <div>
-        <span>
-
-            <p>Choose the location</p>
-        </span>
-    </div>
-</div>*@
-
 @section Scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        //function on() {
-        //    document.getElementById("overlay-div").style.display = "block";
-        //}
+        $(function () {
+            $(".select-location-box-part").click(function () {
+                $("#overlay-div").show();
+            });
 
-        //function off() {
-        //    document.getElementById("overlay-div").style.display = "none";
-        //}
+            $("#overlay-div > .overlay-choose-location > button").click(function () {
+                $("#overlay-div").hide();
+            });
+        });
 
-        var content = document.querySelector(".select-location-box-part");
-        var overlay = document.querySelector("#overlay-div");
-
-        content.addEventListener("click", function () {
-            if (overlay.style.visibility === "hidden") { 
-                overlay.style.visibility = "visible"; 
-            }
-            else { 
-                overlay.style.visibility = "hidden"; 
-            }
+        
+        $(document).ready(function () {
+            $("#getExperienceButton").click(function () {
+                var selectedParkId = $("input[name='selectedParkId']:checked").val();
+                console.log(selectedParkId);
+                $.post("@Url.Action("GetExperienceNames", "Reservation")", { selectedParkId: selectedParkId }, function (data) {
+                    var experienceNamesHtml = "<h4>Experience Names:</h4><ul>";
+                    $.each(data, function (index, experienceName) {
+                        experienceNamesHtml += "<li>" + experienceName + "</li>";
+                    });
+                    experienceNamesHtml += "</ul>";
+                    $("#experienceNamesContainer").html(experienceNamesHtml);
+ 
+                });
+                console.log(selectedParkId);
+            });
         });
         
 
-        function closeDiv() {
-            document.getElementById("overlay-div").style.display = "none";
-        }
     </script>
 }
