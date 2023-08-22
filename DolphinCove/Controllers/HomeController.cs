@@ -17,7 +17,26 @@ public class HomeController : Controller
     {
         return View();
     }
-
+    public IActionResult SwimAdventure()
+    {
+        return View();
+    }
+    public IActionResult SharkEncounter()
+    {
+        return View();
+    }
+    public IActionResult Encounter()
+    {
+        return View();
+    }
+    public IActionResult AdmissionPlus()
+    {
+        return View();
+    }
+    public IActionResult DolphinRoyalSwim()
+    {
+        return View();
+    }
     public IActionResult Privacy()
     {
         return View();

@@ -20,7 +20,7 @@ namespace DolphinCove.Migrations
                 .HasAnnotation("ProductVersion", "6.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("DolphinCove.Models.Addon", b =>
                 {
@@ -28,7 +28,7 @@ namespace DolphinCove.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AddonImage1")
                         .IsRequired()
@@ -43,7 +43,7 @@ namespace DolphinCove.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addons");
+                    b.ToTable("Addons", (string)null);
                 });
 
             modelBuilder.Entity("DolphinCove.Models.Cruise", b =>
@@ -52,7 +52,7 @@ namespace DolphinCove.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CruiseName")
                         .IsRequired()
@@ -60,7 +60,7 @@ namespace DolphinCove.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cruises");
+                    b.ToTable("Cruises", (string)null);
                 });
 
             modelBuilder.Entity("DolphinCove.Models.Experience", b =>
@@ -69,7 +69,7 @@ namespace DolphinCove.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ExperienceImage1")
                         .IsRequired()
@@ -93,7 +93,7 @@ namespace DolphinCove.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Experiences");
+                    b.ToTable("Experiences", (string)null);
                 });
 
             modelBuilder.Entity("DolphinCove.Models.Park", b =>
@@ -102,7 +102,7 @@ namespace DolphinCove.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("ExperienceId1")
                         .HasColumnType("int");
@@ -150,7 +150,7 @@ namespace DolphinCove.Migrations
 
                     b.HasIndex("ExperienceId8");
 
-                    b.ToTable("Parks");
+                    b.ToTable("Parks", (string)null);
                 });
 
             modelBuilder.Entity("DolphinCove.Models.PromotionCode", b =>
@@ -159,7 +159,7 @@ namespace DolphinCove.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("PromoCode")
                         .IsRequired()
@@ -170,7 +170,7 @@ namespace DolphinCove.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PromotionCodes");
+                    b.ToTable("PromotionCodes", (string)null);
                 });
 
             modelBuilder.Entity("DolphinCove.Models.Reservation", b =>
@@ -179,7 +179,7 @@ namespace DolphinCove.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("AddonId")
                         .HasColumnType("int");
@@ -250,7 +250,7 @@ namespace DolphinCove.Migrations
 
                     b.HasIndex("PromotionCodeId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Reservations", (string)null);
                 });
 
             modelBuilder.Entity("DolphinCove.Models.Park", b =>
