@@ -65,7 +65,7 @@ namespace DolphinCove.Controllers
             {
                 var files = HttpContext.Request.Form.Files;
                 string WebRoot = _webHostEnvironment.WebRootPath;
-                string uploadPath = WebRoot + AppConst.UploadPath;
+                string uploadPath = WebRoot + AppConst.UploadPathExp;
                 for (int i = 0; i < files.Count; i++)
                 {
                     string filename = Guid.NewGuid().ToString();
