@@ -7,38 +7,339 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DolphinCove.styles.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/031ed8d715.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DolphinCove</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <div class="container section__container">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <a href="/"><img src="https://www.dolphincoveja.com/Content/src/logo.png" width="105" height="48" alt="Dolphin Cove Logo" class=""></a>
+
+                    <div class="reserve__header">
+                        <div class="booknow__button-mobile ReserveButtonHeader d-md-none" id="ReserveButtonHeader">
+                            <span>Book Now</span>
+                        </div>
+                        <div>
+                            <a href="/shopcart" style="display: block;" class="btn-header  shopcart-wrapper">
+                                <div class="shopcart-icon">
+                                    <span class="fa-layers fa-fw" style="position: relative;">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                        <span class="fa-layers-counter">1</span>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="d-none d-md-block">
+                            <button class="btn-header phones" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                                <img src="https://www.dolphincoveja.com/Content/img/icons/icon-awesome-phone.svg" width="16" height="16" alt="Phone Icon">
+                            </button>
+                        </div>
+
+                        <div>
+                            <button class="btn d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+
+                            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                                <div class="offcanvas-header">
+                                    <h3 class="offcanvas-title" id="offcanvasExampleLabel">Dolphin Cove Jamaica</h3>
+                                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                </div>
+                                <div class="offcanvas-body">
+                                    <div>
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item dropdown">
+                                                <img src="/Content/img/icons/icon-awesome-umbrella-beach.svg" alt="umbrella icon" width="20" height="16" class="img-icon d-md-none">
+                                                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Habitats
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                    <ul class="section__container">
+                                                        <li>
+                                                            <a class="dropdown-item" href="/Parks/dolphin-cove-ocho-rios">
+                                                                <picture>
+                                                                    <source media="(min-width:768px)" srcset="https://www.dolphincoveja.com/Content/img/menu/ocho-rios-menu-desk.jpg">
+                                                                    <img src="/Content/img/menu/ocho-rios-menu-mobile.jpg" alt="Ocho Rios Menu" width="134" height="128">
+                                                                </picture>
+                                                                <p>Ocho Rios</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="/Parks/dolphin-cove-montego-bay">
+                                                                <picture>
+                                                                    <source media="(min-width:768px)" srcset="https://www.dolphincoveja.com/Content/img/menu/montego-bay-menu-desk.jpg">
+                                                                    <img src="/Content/img/menu/montego-bay-menu-mobile.jpg" alt="Montego Bay Menu" width="134" height="128">
+                                                                </picture>
+                                                                <p>Montego Bay</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="/Parks/moon-palace-jamaica">
+                                                                <picture>
+                                                                    <source media="(min-width:768px)" srcset="https://www.dolphincoveja.com/Content/img/menu/moon-palace-menu-desk.jpg">
+                                                                    <img src="/Content/img/menu/moon-palace-menu-mobile.jpg" alt="Moon Palace Menu" width="134" height="128">
+                                                                </picture>
+                                                                <p>Moon Palace</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="/Parks/dolphin-cove-puerto-seco">
+                                                                <picture>
+                                                                    <source media="(min-width:768px)" srcset="https://www.dolphincoveja.com/Content/img/menu/puerto-seco-menu-desk.jpg">
+                                                                    <img src="/Content/img/menu/puerto-seco-menu-mobile.jpg" alt="Puerto Seco Menu" width="134" height="128">
+                                                                </picture>
+                                                                <p>Puerto Seco</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="https://www.yaamanadventure.com/" target="_blank">
+                                                                <picture>
+                                                                    <source media="(min-width:768px)" srcset="https://www.dolphincoveja.com/Content/img/menu/yaaman-menu-desk.jpg">
+                                                                    <img src="/Content/img/menu/yaaman-menu-mobile.jpg" alt="Yaaman Menu" width="134" height="128">
+                                                                </picture>
+                                                                <p>Yaaman</p>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="nav-item">
+                                                <img src="/Content/img/icons/icon-awesome-ticket-alt.svg" alt="ticket icon" width="20" height="13" class="img-icon d-md-none">
+                                                <a href="/swim-with-dolphins-experiences">Experiences</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <img src="/Content/img/icons/icon-awesome-percentage.svg" alt="percentage icon" width="20" height="16" class="img-icon d-md-none">
+                                                <a href="/deals">Deals</a>
+                                            </li>
+
+                                            <li class="nav-item d-md-none">
+                                                <div class="row tollfree">
+                                                    <button class="btn-mobile" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                                                        <img src="https://www.dolphincoveja.com/Content/img/icons/icon-awesome-phone.svg" width="12" height="12" alt="phone icon">
+                                                        TOLL FREE
+                                                    </button>
+
+                                                    <button onclick="on()"><i class="fa-solid fa-phone-flip"></i></button>
+
+                                                    <a href="" target="_blank">
+                                                        <img src="/Content/src/photos.png" width="17" height="18" alt="memories icon">
+                                                        PHOTOS
+                                                    </a>
+                                                </div>
+                                                <button type="button" class="close-txt text-reset" data-bs-dismiss="offcanvas" aria-label="Close">Close</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+
+            <div class="offcanvas-body" id="offcanvas-body">
+                <div class="phone-list">
+                    <div class="phone-item">
+                        <a href="tel:18663935158" style="display: flex; padding: 5px 0px;">
+                            <div style="display: flex; /* padding-right: 150px; */">
+                                <img src="https://flagcdn.com/us.svg" width="24" height="12" style="margin: 6px 12px 0px 0px;" alt="USA Flag" />
+                                <div style="color: black;">
+                                    <strong style="font-size: 16px; font-weight: 500">United States</strong>
+                                    <br />
+                                    <p>1-866-393-5158</p>
+                                </div>
+                            </div>
+                            <img src="https://www.svgrepo.com/show/510165/right-arrow.svg" class="arrow-right" alt="arrow right" width="12" height="13" />
+                        </a>
+                    </div>
+
+                    <div class="phone-item">
+                        <a href="tel:18667931905" style="display: flex; padding: 5px 0px;">
+                            <div style="display: flex; /* padding-right: 150px; /">
+                                <img src="https://flagcdn.com/ca.svg" alt="Canada" width="24" height="12" style="margin: 6px 12px 0px 0px;" />
+                                <div style="color: black;">
+                                    <strong style="font-size: 16px; font-weight: 500">Canada</strong>
+                                    <br />
+                                    <p>1-866-793-1905</p>
+                                </div>
+                            </div>
+                            <img src="https://www.svgrepo.com/show/510165/right-arrow.svg" class="arrow-right" alt="arrow right" width="12" height="13" />
+                        </a>
+                    </div>
+
+                    <div class="phone-item">
+                        <a href="tel:18006800420" style="display: flex; padding: 5px 0px;">
+                            <div style="display: flex; /* padding-right: 150px; /">
+                                <img src="https://flagcdn.com/gb.svg" alt="United Kingdom" width="24" height="12" style="margin: 6px 12px 0px 0px;" />
+                                <div style="color: black;">
+                                    <strong style="font-size: 16px; font-weight: 500">United Kingdom</strong>
+                                    <br />
+                                    <p>1-800-680-0420</p>
+                                </div>
+                            </div>
+                            <img src="https://www.svgrepo.com/show/510165/right-arrow.svg" class="arrow-right" alt="arrow right" width="12" height="13" />
+                        </a>
+                    </div>
+
+                    <div class="phone-item">
+                        <a href="tel:18887515391" style="display: flex; padding: 5px 0px;">
+                            <div style="display: flex; /* padding-right: 150px; /">
+                                <img src="https://flagcdn.com/do.svg" alt="Dominican Republic" width="24" height="12" style="margin: 6px 12px 0px 0px;" />
+                                <div style="color: black;">
+                                    <strong style="font-size: 16px; font-weight: 500">Dominican Republic</strong>
+                                    <br />
+                                    <p>1-888-751-5391</p>
+                                </div>
+                            </div>
+                            <img src="https://www.svgrepo.com/show/510165/right-arrow.svg" class="arrow-right" alt="arrow right" width="12" height="13" />
+                        </a>
+                    </div>
+
+                    <div class="phone-item">
+                        <a href="tel:18007275391" style="display: flex; padding: 5px 0px;">
+                            <div style="display: flex; /* padding-right: 150px; /">
+                                <img src="https://flagcdn.com/mx.svg" alt="Mexico" width="24" height="12" style="margin: 6px 12px 0px 0px;" />
+                                <div style="color: black;">
+                                    <strong style="font-size: 16px; font-weight: 500">Mexico</strong>
+                                    <br />
+                                    <p>1-800-727-5391</p>
+                                </div>
+                            </div>
+                            <img src="https://www.svgrepo.com/show/510165/right-arrow.svg" class="arrow-right" alt="arrow right" width="12" height="13" />
+                        </a>
+                    </div>
+
+                    <div class="phone-item">
+                        <a href="tel:18769745335" style="display: flex; padding: 5px 0px;">
+                            <div style="display: flex;">
+                                <img src="https://flagcdn.com/jm.svg" alt="Jamaica" width="24" height="12" style="margin: 6px 12px 0px 0px;" />
+                                <div style="color: black;">
+                                    <strong style="font-size: 16px; font-weight: 500">Jamaica</strong>
+                                    <br />
+                                    <p>1-876-974-5335</p>
+                                </div>
+                            </div>
+                            <img src="https://www.svgrepo.com/show/510165/right-arrow.svg" class="arrow-right" alt="arrow right" width="12" height="13" />
+                        </a>
+                    </div>
+
+                    <div class="phone-item">
+                        <a href="https://www.facebook.com/dolphincove/" target="blank" style="display: flex; padding: 5px 0px;">
+                            <div class="align-items-center">
+                                <img src="https://www.dolphincoveja.com/Content/img/tollfree/facebook-icon.svg" alt="Facebook Icon" width="24" height="24" class="mt-0" style="margin: 6px 12px 0px 0px;" />
+                                <div>
+                                    <strong style="color: black; font-weight: 500;">Facebook</strong>
+                                </div>
+                            </div>
+                            <img src="https://www.svgrepo.com/show/510165/right-arrow.svg" class="arrow-right" alt="arrow right" width="12" height="13" />
+                        </a>
+                    </div>
+
+                    <div class="phone-item">
+                        <a href="https://wa.me/5219983870454" rel="noopener" target="blank" style="display: flex; padding: 5px 0px;">
+                            <div class="align-items-center">
+                                <img src="https://www.dolphincoveja.com/Content/img/tollfree/whatsapp-icon.svg" alt="Whatsapp Icon" width="24" height="24" class="mt-0" style="margin: 6px 12px 0px 0px;" />
+                                <div>
+                                    <strong style="color: black; font-weight: 500;">Whatsapp</strong>
+                                </div>
+                            </div>
+                            <img src="https://www.svgrepo.com/show/510165/right-arrow.svg" class="arrow-right" alt="arrow right" width="12" height="13" />
+                        </a>
+                    </div>
                 </div>
             </div>
-        </nav>
+        </div>
+        </div>
+
+               
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container" onclick="off()">
+        <main role="main" class="pb-5">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - DolphinCove - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="container" onclick="off()">
+                <center class="footer_container container">
+                    <div class="redes_sociales">
+                    <span><strong>Follow Us: </strong></span>
+                        <div class="social-media-icons">
+                            <a class="facebook" href="https://www.facebook.com/DolphinCove/?fref=ts" target="_blank">
+                            <img data-lazy="https://www.dolphincoveja.com/Content/img/footer/facebook_icono.svg" alt="facebook" width="24" height="24" class="" srcset="https://www.dolphincoveja.com/Content/img/footer/facebook_icono.svg">
+                            </a>
+                            <a class="instagram" href="https://instagram.com/dolphincovejamaica?igshid=NmNmNjAwNzg=" target="_blank">
+                            <img data-lazy="https://www.dolphincoveja.com/Content/img/footer/instagram_icono.svg" alt="instagram" width="24" height="24" class="" srcset="https://www.dolphincoveja.com/Content/img/footer/instagram_icono.svg">
+                            </a>
+                            <a class="twitter" href="https://twitter.com/dolphincovejm?s=21&amp" target="_blank">
+                            <img data-lazy="https://www.dolphincoveja.com/Content/img/footer/twitter_icono.svg" alt="twitter" width="24" height="24" class="" srcset="https://www.dolphincoveja.com/Content/img/footer/twitter_icono.svg">
+                            </a>
+                            <a class="tiktok" href="https://www.tiktok.com/dolphincoveochorios?_t=8WG3euzr0tB&amp" target="_blank">
+                            <img data-lazy="https://www.dolphincoveja.com/Content/img/footer/tiktok_icono.svg" alt="tiktok" width="24" height="24" class="" srcset="https://www.dolphincoveja.com/Content/img/footer/tiktok_icono.svg">
+                            </a>
+                            <a class="tripadvisor" href="https://www.tripadvisor.com.mx/Attraction_Review-g147312-d274030-Reviews-Dolphin_Cove_Ocho_Rios-Ocho_Rios_Saint_Ann_Parish_Jamaica.html" target="_blank">
+                            <img data-lazy="https://www.dolphincoveja.com/Content/img/footer/tripadvisor_icono.svg" alt="tripadvisor" width="28" height="16" class="" srcset="https://www.dolphincoveja.com/Content/img/footer/tripadvisor_icono.svg">
+                            </a>
+                        </div>
+                    </div>
+                </center>
+
+                <div class="sister_parks">
+                    <center class="footer_container container home-container">
+                        <div class="toogleMenu">
+                            <h4>Dolphin Cove <i class="fa fa-sort-desc" aria-hidden="true"></i></h4>
+                            <ul>
+                                <li><a href="/Home/Habitats">Habitats</a></li>
+                                <li><a href="/swim-with-dolphins-experiences">Experiences</a></li>
+                                <li><a href="/deals">Deals</a></li>
+                                <li> <a href="/investor-relations">Investor Relations</a></li>
+                            </ul>
+                        </div>
+                        <div class="toogleMenu">
+                            <h4>Trust us <i class="fa fa-sort-desc" aria-hidden="true"></i></h4>
+                            <ul>
+                                <li> <a href="/contact-us">Contact Us</a></li>
+                                <li> <a href="/privacy-policy">Privacy Policy</a></li>
+                                <li> <a href="/social-media-privacy-policy">Social Media Policy</a></li>
+                                <li><a href="https://www.thedolphinco.com/Terms-and-Conditions" target="_blank">Site policies</a></li>
+                                <li> <a href="/frequently-asked-questions-dolphin-cove">Faq's</a></li>
+                                <li><a target="_blank" href="https://blog.dolphincoveja.com/">Blog</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="toogleMenu">
+                            <h4>Information <i class="fa fa-sort-desc" aria-hidden="true"></i></h4>
+                            <ul>
+
+                                <li> <a href="/news">News</a></li>
+                                <li> <a href="/about-us">About Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="toogleMenu">
+                            <h4>Sister Brands <i class="fa fa-sort-desc" aria-hidden="true"></i></h4>
+                            <ul>
+                                <li><a href="http://www.dolphindiscovery.com" target="_blank" rel="nofollow">Dolphin Discovery</a></li>
+                                <li><a href="http://www.yaamanadventure.com" target="_blank" rel="nofollow">Yaaman </a></li>
+                                <li><a href="http://www.garrafon.com" target="_blank" rel="nofollow">Garrafon</a></li>
+                                <li><a href="http://www.aquaventuras.com/" target="_blank" rel="nofollow">Aquaventuras</a></li>
+                                <li><a href="https://www.oceanadventures-puntacana.com/" target="_blank" rel="nofollow">Ocean Adventures</a></li>
+
+                            </ul>
+                        </div>
+                    </center>
+                    <div>
+                        <p style="color:#2c2c2c;margin-bottom:16px"><strong>Proudly part of</strong></p>
+                        <picture>
+                            <source data-lazy="https://www.dolphincoveja.com/Content/img/footer/TDC_logo.svg" media="(max-width: 600px)" width="88" height="26" class="" srcset="https://www.dolphincoveja.com/Content/img/footer/TDC_logo.svg">
+                            <img data-lazy="https://www.dolphincoveja.com/Content/img/footer/TDC_logo.svg" alt="The Dolphin Co" width="88" height="26" class="" loading="lazy" srcset="https://www.dolphincoveja.com/Content/img/footer/TDC_logo.svg">
+                        </picture>
+                    </div>
+                </div> 
+            </>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -48,3 +349,12 @@
 </body>
 </html>
 
+    <script>
+        function on() {
+            document.getElementById("offcanvas-body").style.display = "block";
+        }
+
+        function off() {
+            document.getElementById("offcanvas-body").style.display = "none";
+        }
+    </script>
