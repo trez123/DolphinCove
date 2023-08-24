@@ -56,17 +56,24 @@ body {
     left: 0;
 }
 
-.fa-map-marker, .fa-calendar, .fa-user-friends {
+.fa-map-marker, .fa-calendar, .fa-user-friends, .fa-location-arrow {
     color: #39A4AC;
 }
 
-.choose-location{
+.choose-location, .choose-activity{
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
 }
 
-#choose-location-text, #lblDate, #lblSchedule, #lblParticipants, #lblActivity {
+.schedule-date {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+#choose-location-text, #lblDate, #lblSchedule, 
+#lblParticipants, #lblActivity, #lblSchedule {
     font-size: 14px;
     color: #39A4AC;
     margin-left: 10px;
@@ -99,10 +106,6 @@ body {
     margin-bottom: 15px;
 }
 
-.choose-activity{
-    margin-bottom: 15px;
-    display: none;
-}
 
 
 
@@ -110,27 +113,34 @@ body {
 
 
 /*Testing Section*/
-.select-location-box-part {
+.select-location-box-part, .select-activity-box-part, .select-date-box-part,
+.select-schedule-box-part, .select-participants-box-part {
     border: 1px solid #B6B5B575;
     border-radius: 3px;
     cursor: pointer;
-    /*z-index: 5;*/
-    width: 100%;
-    height: 100%;
+    width: 100%; /*
+    height: 100%;*/
 }
 
-.select-location-box-part:hover {
+
+.select-location-box-part:hover, .select-activity-box-part:hover, 
+.select-date-box-part:hover, .select-schedule-box-part:hover,
+.select-participants-box-part:hover{
     border: 1px solid #39A4AC;
     border-radius: 3px;
 }
 
-.select-location-box-part span{
+.select-location-box-part span, .select-activity-box-part div,
+.select-date-box-part div, select-schedule-box-part div,
+.select-participants-box-part div{
     display: flex;
     justify-content: space-between;
     padding: 10px;
 }
 
-.select-location-box-part span p{
+.select-location-box-part span p, .select-activity-box-part div p,
+.select-date-box-part div p, .select-schedule-box-part div p,
+.select-participants-box-part div p{
     margin: 0px;
     font-size: 13px;
     color: #B6B5B575;
@@ -179,7 +189,7 @@ body {
 
 }*/
 
-#overlay-div {
+#overlay-div, #overlay-div2, #overlay-div3, #overlay-div4, #overlay-div5 {
     position: fixed;
     top: 130px;
     left: 105px;
@@ -198,7 +208,9 @@ body {
 #selectlocationgetid{
     margin-top: 40px;
 }
-#overlay-div > button {
+
+#overlay-div > button, #overlay-div2 > button, #overlay-div3 > button, 
+#overlay-div4 > button, #overlay-div5 > button {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -212,14 +224,14 @@ body {
     color: #39A4AC;
 }
 
-.overlay-choose-location {
+.overlay-choose-location, .overlay-choose-activity, .overlay-choose-date,
+.overlay-choose-schedule, .overlay-choose-participants {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
 }
 
-.overlay-choose-location p{
+.overlay-choose-location p, .overlay-choose-activity p, .overlay-choose-date p, .overlay-choose-schedule p {
     color: #818181;
     margin: 0px;
     font-size: 15px;
@@ -254,6 +266,31 @@ body {
         align-items: center;
     }
 
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 30px repeat(5, 1fr);
+    gap: 1px;
+    width: 300px;
+}
 
+.calendar .header {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    grid-column: 1 / -1;
+}
+
+.calendar .date {
+    text-align: center;
+    padding: 10px;
+    background-color: #eee;
+}
+
+.calendar .past {
+    color: #999;
+    opacity: 0.5;
+}
 
 

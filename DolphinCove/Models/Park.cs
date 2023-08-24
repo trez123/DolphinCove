@@ -62,5 +62,12 @@ namespace DolphinCove.Models
         public int? ExperienceId8 { get; set; }
         [ForeignKey("ExperienceId8")]
         public virtual Experience? Experience8 { get; set; }
+
+
+
+        public ICollection<Experience> Experiences
+        {
+            get { return new List<Experience> { Experience1, Experience2, Experience3, Experience4, Experience5 }; }
+        }
     }
 }

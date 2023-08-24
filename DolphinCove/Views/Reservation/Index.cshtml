@@ -6,7 +6,7 @@
 <h1>Index</h1>
 
 <div class="right-section">
-    @*<form asp-action="" method="post" id="" class="form-wrapper2">*@
+    <form asp-action="SaveToDb" method="post" id="" class="form-wrapper2">
         <div class="make-reservation-text-container">
             <h1>MAKE YOUR RESERVATION</h1>
         </div>
@@ -17,38 +17,33 @@
                     <label id="choose-location-text">Choose the location</label>
                 </div>
 
-                
 
                 <div class="select-location-box-part">
-                    
-                        <span>
-                        <p>Select location</p>
+                    <span>
+                    <p id="selected-radio-text">Select location</p>
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </span>
-                    
-
+                    </span>
                 </div>
+
+
                 <div id="overlay-div" style="display: none;">
-                        <div class="overlay-choose-location">
-                            <p>Choose the Location</p>
-                            <button>
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </button>
-                        </div>
+                    <div class="overlay-choose-location">
+                        <p>Choose the Location</p>
+                        <button>
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                    </div>
 
-                        <div class="radio-location">
-                            @foreach (var park in Model)
-                            {
-                                <div class="radbtn">
-                                    <input type="radio" name="selectedParkId" value="@park.Id" /> @park.ParkName
-                                </div>
-                            }
-                        </div>
-
-                    <button id="getExperienceButton">Select Location</button>
-                    <div id="experienceNamesContainer"></div>
-                
-                
+                    <div class="radio-location">
+                        @foreach (var park in Model)
+                        {
+                            <div class="radbtn">
+                                <input type="radio" name="selectedParkId" value="@park.Id" /> @park.ParkName
+                            </div>
+                        }
+                     </div>
+                     
+                     <button type="button" id="getExperienceButton" onclick="getSelectedRadioButtonText()" style="margin-top: 40px;">Select Location</button>
                 </div>
             </div>
 
@@ -56,20 +51,37 @@
 
 
 
-
-
-            @*<div class="choose-activity">
+            <div class="choose-activity" style="display: none;">
                 <div class="choose-loc-cont">
-                    <i class="fa-solid fa-location-arrow fa-lg" aria-hidden="true"></i>
+                    <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
                     <label id="lblActivity">Choose the activity</label>
                 </div>
-                <div>
-                    <!--asp-for="" after select-->
-                    <select asp-for="ExperienceId" asp-items="@ViewBag.ExperienceNameDropdown" class="form-control" id="activity-name">
-                        <option selected disabled id="sel-loc">Select Activity</option>
-                    </select>
+
+
+                <div class="select-activity-box-part">
+                    <div>
+                        <p id="selected-activity-radio-text">Select Activity</p>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
                 </div>
-            </div>*@
+
+
+                <div id="overlay-div2" style="display: none;">
+                    <div class="overlay-choose-activity">
+                        <p>Choose the Activity</p>
+                        <button>
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <button type="button" id="getExperienceButton2" onclick="getSelectedRadioButtonText2()" style="margin-top: 40px;">Select Activity</button>
+                    <div id="experienceNamesContainer"></div>
+                </div>
+            </div>
+
+
+
+
 
             <div class="schedule-date">
                 <div class="select-date">
@@ -77,43 +89,127 @@
                         <i class="fa fa-calendar fa-lg" aria-hidden="true"></i>
                         <label id="lblDate">Date</label>
                     </div>
-                    <div>
-                        <!--asp-for="" after select-->
-                        @*<select asp-items="@ViewBag.VisitorNameDropdown" class="form-control" id="select-date-name">
-                            <option selected disabled id="sel-loc">- - Choose - -</option>
-                        </select>*@
-                        <input type="date" />
+
+                    <div class="select-date-box-part">
+                        <div>
+                            <p id="selectedDate">- - Choose - -</p>
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                    <div id="overlay-div3" style="display: none;">
+                        <div class="overlay-choose-date">
+                            <p>Choose the Date</p>
+                            <button>
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+
+                        <button type="button" id="getExperienceButton2" onclick="getSelectedRadioButtonText2()" style="margin-top: 40px;">Select your date</button>
+                        @*<div id="experienceNamesContainer"></div>*@
+
+                        <input type="date" id="dateInput" name="schedule_date" />
                     </div>
                 </div>
+
+
+
+
+
+
 
                 <div class="select-schedule">
                     <div class="choose-loc-cont">
                         <i class="fas fa-clock fa-lg" aria-hidden="true"></i>
                         <label id="lblSchedule">Schedule</label>
                     </div>
-                    <div>
-                        <!--asp-for="" after select-->
-                        <select asp-items="@ViewBag.VisitorNameDropdown" class="form-control" id="select-date-name">
-                            <option selected disabled id="sel-loc">- - Choose - -</option>
-                        </select>
+
+
+                    <div class="select-schedule-box-part">
+                        <div>
+                            <p id="selectedScheduleTime">- - Choose - -</p>
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </div>
                     </div>
+
+
+                    <div id="overlay-div4" style="display: none;">
+                        <div class="overlay-choose-schedule">
+                            <p>Choose the Schedules</p>
+                            <button>
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+
+                        <div>
+                            <input type="radio" id="first-time" name="schedule_time" value="10:15">
+                            <label for="first-time">10:15</label><br>
+
+                            <input type="radio" id="second-time" name="schedule_time" value="11:45">
+                            <label for="second-time">11:45</label>
+                        </div>
+
+                        <button type="button" id="getExperienceButton3" onclick="getSelectedRadioButtonText3()" style="margin-top: 40px;">Select your date</button>
+                        @*<div id="experienceNamesContainer"></div>*@
+
+                    </div>
+
                 </div>
             </div>
+
+
+
 
             <div class="select-partipants">
                 <div class="choose-loc-cont">
                     <i class="fas fa-user-friends fa-lg" aria-hidden="true"></i>
                     <label id="lblParticipants">Participants</label>
                 </div>
-                <div>
-                    <!--asp-for="" after select-->
-                    <select asp-items="@ViewBag.VisitorNameDropdown" class="form-control" id="participants-name">
-                        <option selected disabled id="sel-loc">2 Adults</option>
-                    </select>
+
+                <div class="select-participants-box-part">
+                    <div>
+                        <p id="selectedAmountOfParticipants">- - Choose - -</p>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
                 </div>
+
+                <div id="overlay-div5" style="display: none;">
+                    <div class="overlay-choose-participants">
+                        <button>
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <div>
+                        <p style="margin-top: 90px;">Adults</p>
+                        <div>
+                            <input type="number" id="amtAdults" min="1" value="2" name="adultNumber"/>
+                        </div>
+
+                        <p>Children</p>
+                        <div>
+                            <input type="number" id="amtChildren" min="0" value="0" name="childrenNumber"/>
+                        </div>
+
+                        <p>Infants (1 - 5 years *Free)</p>
+                        <div>
+                            <input type="number" id="amtInfants" min="0" value="0" name="infantNumber" />
+                        </div>
+                    </div>
+
+
+                    <button type="button" id="getExperienceButton4" onclick="getSelectedRadioButtonText4()" style="margin-top: 40px;">Select your participants</button>
+                    @*<div id="experienceNamesContainer"></div>*@
+                </div>
+
+
             </div>
+
+            <button id="bookNowBtn" type="submit">Book Now</button>
         </div>
-    @*</form>*@
+    </form>
 
     <div></div>
 </div>
@@ -132,24 +228,202 @@
             });
         });
 
-        
+
+
+        //$(document).ready(function () {
+        //    $(`#getExperienceButton`).click(function () {
+        //        var selectedParkId = $(`input[name='selectedParkId']:checked`).val();
+        //        console.log(selectedParkId);
+
+        //        $.post(`@Url.Action("GetExperienceNames", "Reservation")`, { selectedParkId: selectedParkId }, function (data) {
+        //            var experienceNamesHtml = `<h4>Experience Names:</h4>`;
+        //            $.each(data, function (index, experienceName) {
+        //                experienceNamesHtml += `<input type="radio" name="experienceName" value="` + experienceName + `" />` + experienceName + `<br/>`;
+        //            });
+
+        //            $(`#experienceNamesContainer`).html(experienceNamesHtml);
+        //        });
+
+        //        console.log(selectedParkId);
+               
+        //    });
+        //});
+
+
+
         $(document).ready(function () {
-            $("#getExperienceButton").click(function () {
-                var selectedParkId = $("input[name='selectedParkId']:checked").val();
+            $(`#getExperienceButton`).click(function () {
+                var selectedParkId = $(`input[name='selectedParkId']:checked`).val();
                 console.log(selectedParkId);
-                $.post("@Url.Action("GetExperienceNames", "Reservation")", { selectedParkId: selectedParkId }, function (data) {
-                    var experienceNamesHtml = "<h4>Experience Names:</h4><ul>";
-                    $.each(data, function (index, experienceName) {
-                        experienceNamesHtml += "<li>" + experienceName + "</li>";
+                $.post(`@Url.Action("GetExperienceNames", "Reservation")`, { selectedParkId: selectedParkId }, function (data) {
+                    var experienceNamesHtml = `<h4>Experience Names:</h4>`;
+                    $.each(data, function (index, experienceNames) {
+                        console.log(experienceNames)
+                        const experienceIdInt = parseInt(experienceNames.experienceId);
+
+                        experienceNamesHtml += `<input type="radio" name="experience" value="${experienceIdInt}">${experienceNames.experienceName}<br/>`;
+
                     });
-                    experienceNamesHtml += "</ul>";
-                    $("#experienceNamesContainer").html(experienceNamesHtml);
- 
+                    $(`#experienceNamesContainer`).html(experienceNamesHtml);
+
+                    var div3 = document.getElementsByClassName("choose-activity")[0];
+                    div3.style.display = "block";
+
+                    // Hide the div after updating its content
+                    $(`#overlay-div`).hide();
                 });
                 console.log(selectedParkId);
             });
         });
+
+
+        $(document).ready(function () {
+            $(`#getExperienceButton2`).click(function () {
+                var selectedParkId = $(`input[name='selectedParkId']:checked`).val();
+                console.log(selectedParkId);
+                $.post(`@Url.Action("GetExperienceNames", "Reservation")`, { selectedParkId: selectedParkId }, function (data) {
+                    console.log(data)
+                    var experienceNamesHtml = `<h4>Experience Names:</h4>`;
+                    $.each(data, function (index, experienceName) {
+                        //console.log(`${experienceId}`)
+                        const experienceIdInt = parseInt(experienceName.experienceId);
+
+                        // Now you have the experienceId as an integer
+                        console.log(typeof experienceIdInt); // Output: "number"
+
+                        experienceNamesHtml += `<input type="radio" name="experience" value="${experienceIdInt}">${experienceName.experienceName}<br/>`;
+                        ////console.log(typeof (`${ experienceName.experienceId}`))
+                    });
+                    $(`#experienceNamesContainer`).html(experienceNamesHtml);
+             
+                    // Hide the div after updating its content
+                    $(`#overlay-div2`).hide();
+                    
+                });
+                
+                console.log(selectedParkId);
+            });
+        });
         
+
+
+
+
+        $(function () {
+            $(".select-activity-box-part").click(function () {
+                $("#overlay-div2").show();
+            });
+
+            $("#overlay-div2 > .overlay-choose-activity > button").click(function () {
+                $("#overlay-div2").hide();
+            });
+        });
+
+        
+        function getSelectedRadioButtonText() {
+            var selectedRadioButton = document.querySelector('input[name="selectedParkId"]:checked');
+            var selectedPark = selectedRadioButton.nextSibling.nodeValue;
+            document.getElementById('selected-radio-text').textContent = selectedPark;
+        }
+
+        function getSelectedRadioButtonText2() {
+            var selectedRadioButton2 = document.querySelector('input[name="experienceNames"]:checked');
+            var selectedPark2 = selectedRadioButton2.nextSibling.nodeValue;
+            document.getElementById('selected-activity-radio-text').textContent = selectedPark2;
+        }
+
+
+
+
+        $(function () {
+            $(".select-date-box-part").click(function () {
+                $("#overlay-div3").show();
+            });
+
+            $("#overlay-div3 > .overlay-choose-date > button").click(function () {
+                $("#overlay-div3").hide();
+            });
+        });
+
+
+        document.getElementById("dateInput").addEventListener("change", function () {
+            var selectedDate = document.getElementById("dateInput").value;
+
+            document.getElementById("selectedDate").innerText = selectedDate;
+            $(`#overlay-div3`).hide();
+
+        });
+
+
+        $(function () {
+            $(".select-schedule-box-part").click(function () {
+                $("#overlay-div4").show();
+            });
+
+            $("#overlay-div4 > .overlay-choose-schedule > button").click(function () {
+                $("#overlay-div4").hide();
+            });
+        });
+
+
+        // Add event listener to the button
+        document.getElementById("getExperienceButton3").addEventListener("click", function () {
+            // Get the value of the selected radio button
+            var selectedValue = document.querySelector('input[name="schedule_time"]:checked').value;
+
+            // Update the content of the div with the selected value
+            document.getElementById("selectedScheduleTime").textContent = selectedValue;
+            $("#overlay-div4").hide();
+        });
+
+
+        $(function () {
+            $(".select-participants-box-part").click(function () {
+                $("#overlay-div5").show();
+            });
+
+            $("#overlay-div5 > .overlay-choose-participants > button").click(function () {
+                $("#overlay-div5").hide();
+            });
+        });
+
+
+
+        function getSelectedRadioButtonText4(){
+            var input = document.getElementById("amtAdults");
+            var input2 = document.getElementById("amtChildren");
+            var input3 = document.getElementById("amtInfants");
+            var output = document.getElementById("selectedAmountOfParticipants");
+
+            // Get the value from input field
+            var value = input.value;
+            var value2 = input2.value;
+            var value3 = input3.value;
+
+            if (value2 == 0 && value3 == 0){
+                // Display the value in div
+                output.innerHTML = value + " Adults";
+            }
+            else if (value >= 1 && value2 >= 1) {
+                output.innerHTML = value + " Adults, " + value2 + " Minors";
+            }
+            else if (value >= 1 && value3 >= 1 && value2 == 0) {
+                output.innerHTML = value + " Adults, " + value3 + " Infants";
+            }
+            else if (value >= 1 && value2 >= 1 && value3 >= 1) {
+                output.innerHTML = value + " Adults, " + value2 + " Minors, " + value3 + " Infants";
+            }
+            console.log(value3)
+            $("#overlay-div5").hide();
+            
+        }
+
+
+
+
+        function addDetailsToReservationTb(){
+            
+        }
 
     </script>
 }
