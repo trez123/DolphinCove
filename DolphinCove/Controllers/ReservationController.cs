@@ -97,7 +97,7 @@ namespace DolphinCove.Controllers
         //}
 
 
-        
+
         [HttpPost]
         public IActionResult GetExperienceNames(int selectedParkId)
         {
@@ -140,7 +140,7 @@ namespace DolphinCove.Controllers
 
 
         [HttpPost]
-        public IActionResult SaveToDb(int selectedParkId, int experienceNames, DateTime schedule_time, DateTime schedule_date,  string adultNumber, string childrenNumber, string infantNumber)
+        public IActionResult SaveToDb(int selectedParkId, /*int experienceNames,*/ DateTime schedule_time, DateTime schedule_date, string adultNumber, string childrenNumber, string infantNumber)
         {
 
             var reservationExists = _dbx.Reservations.Any(x => x.Date == schedule_time);
@@ -149,16 +149,16 @@ namespace DolphinCove.Controllers
             {
                 // Save the reservation to the database
                 var radioSelection = new Reservation
-                {   
+                {
                     ParkId = selectedParkId,
-                    ExperienceId = experienceNames,
+                    //ExperienceId = experienceNames,
                     Date = schedule_time,
                     Schedule = schedule_date,
                     AdultParticipant = adultNumber,
                     ChildParticipant = childrenNumber,
                     InfantParticipant = infantNumber
 
-                    
+
                 };
                 _dbx.Reservations.Add(radioSelection);
                 _dbx.SaveChanges();
