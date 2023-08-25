@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DolphinCove.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230824183902_addPromotionCodeToDb")]
-    partial class addPromotionCodeToDb
+    [Migration("20230825040306_addExperienceToDb")]
+    partial class addExperienceToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,6 +63,39 @@ namespace DolphinCove.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cruises");
+                });
+
+            modelBuilder.Entity("DolphinCove.Models.Experience", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ExperienceImage1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExperienceImage2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExperienceImage3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExperienceImage4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExperienceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("ExperiencePrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Experiences");
                 });
 
             modelBuilder.Entity("DolphinCove.Models.PromotionCode", b =>

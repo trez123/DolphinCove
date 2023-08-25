@@ -258,8 +258,9 @@
                 $.post(`@Url.Action("GetExperienceNames", "Reservation")`, { selectedParkId: selectedParkId }, function (data) {
                     var experienceNamesHtml = `<h4>Experience Names:</h4>`;
                     $.each(data, function (index, experienceNames) {
-                        console.log(experienceNames)
+                        //console.log(experienceNames)
                         const experienceIdInt = parseInt(experienceNames.experienceId);
+                        console.log(experienceIdInt)
 
                         experienceNamesHtml += `<input type="radio" name="experience" value="${experienceIdInt}">${experienceNames.experienceName}<br/>`;
 
@@ -289,7 +290,7 @@
                         const experienceIdInt = parseInt(experienceName.experienceId);
 
                         // Now you have the experienceId as an integer
-                        console.log(typeof experienceIdInt); // Output: "number"
+                        //console.log(typeof experienceIdInt); // Output: "number"
 
                         experienceNamesHtml += `<input type="radio" name="experience" value="${experienceIdInt}">${experienceName.experienceName}<br/>`;
                         ////console.log(typeof (`${ experienceName.experienceId}`))
@@ -327,7 +328,7 @@
         }
 
         function getSelectedRadioButtonText2() {
-            var selectedRadioButton2 = document.querySelector('input[name="experienceNames"]:checked');
+            var selectedRadioButton2 = document.querySelector('input[name="experience"]:checked');
             var selectedPark2 = selectedRadioButton2.nextSibling.nodeValue;
             document.getElementById('selected-activity-radio-text').textContent = selectedPark2;
         }

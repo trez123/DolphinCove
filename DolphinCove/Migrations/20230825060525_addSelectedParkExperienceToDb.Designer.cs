@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DolphinCove.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230824184117_addReservationToDb")]
-    partial class addReservationToDb
+    [Migration("20230825060525_addSelectedParkExperienceToDb")]
+    partial class addSelectedParkExperienceToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,12 +94,7 @@ namespace DolphinCove.Migrations
                     b.Property<decimal>("ExperiencePrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ParkId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ParkId");
 
                     b.ToTable("Experiences");
                 });
@@ -112,53 +107,36 @@ namespace DolphinCove.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ExperienceId1")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ExperienceId2")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ExperienceId3")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ExperienceId4")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ExperienceId5")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ExperienceId6")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ExperienceId7")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ExperienceId8")
-                        .HasColumnType("int");
-
                     b.Property<string>("ParkName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExperienceId1");
-
-                    b.HasIndex("ExperienceId2");
-
-                    b.HasIndex("ExperienceId3");
-
-                    b.HasIndex("ExperienceId4");
-
-                    b.HasIndex("ExperienceId5");
-
-                    b.HasIndex("ExperienceId6");
-
-                    b.HasIndex("ExperienceId7");
-
-                    b.HasIndex("ExperienceId8");
-
                     b.ToTable("Parks");
+                });
+
+            modelBuilder.Entity("DolphinCove.Models.ParkExperience", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ExperienceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ParkId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExperienceId");
+
+                    b.HasIndex("ParkId");
+
+                    b.ToTable("ParkExperiences");
                 });
 
             modelBuilder.Entity("DolphinCove.Models.PromotionCode", b =>
@@ -213,9 +191,6 @@ namespace DolphinCove.Migrations
                     b.Property<string>("EmailAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ExperienceId")
-                        .HasColumnType("int");
-
                     b.Property<decimal?>("FinalTotal")
                         .HasColumnType("decimal(18,2)");
 
@@ -228,9 +203,6 @@ namespace DolphinCove.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ParkId")
-                        .HasColumnType("int");
-
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -239,6 +211,9 @@ namespace DolphinCove.Migrations
 
                     b.Property<DateTime?>("Schedule")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("SelectedParkExperienceId")
+                        .HasColumnType("int");
 
                     b.Property<string>("SpecialInstruction")
                         .HasColumnType("nvarchar(max)");
@@ -252,71 +227,45 @@ namespace DolphinCove.Migrations
 
                     b.HasIndex("CruiseId");
 
-                    b.HasIndex("ExperienceId");
-
-                    b.HasIndex("ParkId");
-
                     b.HasIndex("PromotionCodeId");
+
+                    b.HasIndex("SelectedParkExperienceId");
 
                     b.ToTable("Reservations");
                 });
 
-            modelBuilder.Entity("DolphinCove.Models.Experience", b =>
+            modelBuilder.Entity("DolphinCove.Models.SelectedParkExperience", b =>
                 {
-                    b.HasOne("DolphinCove.Models.Park", null)
-                        .WithMany("Experiences")
-                        .HasForeignKey("ParkId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("SelectedExperienceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SelectedParkId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SelectedParkExperiences");
                 });
 
-            modelBuilder.Entity("DolphinCove.Models.Park", b =>
+            modelBuilder.Entity("DolphinCove.Models.ParkExperience", b =>
                 {
-                    b.HasOne("DolphinCove.Models.Experience", "Experience1")
+                    b.HasOne("DolphinCove.Models.Experience", "Experience")
                         .WithMany()
-                        .HasForeignKey("ExperienceId1");
+                        .HasForeignKey("ExperienceId");
 
-                    b.HasOne("DolphinCove.Models.Experience", "Experience2")
+                    b.HasOne("DolphinCove.Models.Park", "Park")
                         .WithMany()
-                        .HasForeignKey("ExperienceId2");
+                        .HasForeignKey("ParkId");
 
-                    b.HasOne("DolphinCove.Models.Experience", "Experience3")
-                        .WithMany()
-                        .HasForeignKey("ExperienceId3");
+                    b.Navigation("Experience");
 
-                    b.HasOne("DolphinCove.Models.Experience", "Experience4")
-                        .WithMany()
-                        .HasForeignKey("ExperienceId4");
-
-                    b.HasOne("DolphinCove.Models.Experience", "Experience5")
-                        .WithMany()
-                        .HasForeignKey("ExperienceId5");
-
-                    b.HasOne("DolphinCove.Models.Experience", "Experience6")
-                        .WithMany()
-                        .HasForeignKey("ExperienceId6");
-
-                    b.HasOne("DolphinCove.Models.Experience", "Experience7")
-                        .WithMany()
-                        .HasForeignKey("ExperienceId7");
-
-                    b.HasOne("DolphinCove.Models.Experience", "Experience8")
-                        .WithMany()
-                        .HasForeignKey("ExperienceId8");
-
-                    b.Navigation("Experience1");
-
-                    b.Navigation("Experience2");
-
-                    b.Navigation("Experience3");
-
-                    b.Navigation("Experience4");
-
-                    b.Navigation("Experience5");
-
-                    b.Navigation("Experience6");
-
-                    b.Navigation("Experience7");
-
-                    b.Navigation("Experience8");
+                    b.Navigation("Park");
                 });
 
             modelBuilder.Entity("DolphinCove.Models.Reservation", b =>
@@ -329,32 +278,21 @@ namespace DolphinCove.Migrations
                         .WithMany()
                         .HasForeignKey("CruiseId");
 
-                    b.HasOne("DolphinCove.Models.Experience", "Experience")
-                        .WithMany()
-                        .HasForeignKey("ExperienceId");
-
-                    b.HasOne("DolphinCove.Models.Park", "Park")
-                        .WithMany()
-                        .HasForeignKey("ParkId");
-
                     b.HasOne("DolphinCove.Models.PromotionCode", "PromotionCode")
                         .WithMany()
                         .HasForeignKey("PromotionCodeId");
+
+                    b.HasOne("DolphinCove.Models.SelectedParkExperience", "SelectedParkExperience")
+                        .WithMany()
+                        .HasForeignKey("SelectedParkExperienceId");
 
                     b.Navigation("Addon");
 
                     b.Navigation("Cruise");
 
-                    b.Navigation("Experience");
-
-                    b.Navigation("Park");
-
                     b.Navigation("PromotionCode");
-                });
 
-            modelBuilder.Entity("DolphinCove.Models.Park", b =>
-                {
-                    b.Navigation("Experiences");
+                    b.Navigation("SelectedParkExperience");
                 });
 #pragma warning restore 612, 618
         }

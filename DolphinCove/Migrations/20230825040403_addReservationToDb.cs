@@ -12,6 +12,30 @@ namespace DolphinCove.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ParkExperience",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ParkId = table.Column<int>(type: "int", nullable: true),
+                    ExperienceId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ParkExperience", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ParkExperience_Experiences_ExperienceId",
+                        column: x => x.ExperienceId,
+                        principalTable: "Experiences",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ParkExperience_Parks_ParkId",
+                        column: x => x.ParkId,
+                        principalTable: "Parks",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reservations",
                 columns: table => new
                 {
@@ -31,11 +55,10 @@ namespace DolphinCove.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ExperienceId = table.Column<int>(type: "int", nullable: true),
                     PromotionCodeId = table.Column<int>(type: "int", nullable: true),
                     AddonId = table.Column<int>(type: "int", nullable: true),
                     CruiseId = table.Column<int>(type: "int", nullable: true),
-                    ParkId = table.Column<int>(type: "int", nullable: true)
+                    ParkExperienceId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,14 +74,9 @@ namespace DolphinCove.Migrations
                         principalTable: "Cruises",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Reservations_Experiences_ExperienceId",
-                        column: x => x.ExperienceId,
-                        principalTable: "Experiences",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Reservations_Parks_ParkId",
-                        column: x => x.ParkId,
-                        principalTable: "Parks",
+                        name: "FK_Reservations_ParkExperience_ParkExperienceId",
+                        column: x => x.ParkExperienceId,
+                        principalTable: "ParkExperience",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Reservations_PromotionCodes_PromotionCodeId",
@@ -66,6 +84,16 @@ namespace DolphinCove.Migrations
                         principalTable: "PromotionCodes",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ParkExperience_ExperienceId",
+                table: "ParkExperience",
+                column: "ExperienceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ParkExperience_ParkId",
+                table: "ParkExperience",
+                column: "ParkId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_AddonId",
@@ -78,14 +106,9 @@ namespace DolphinCove.Migrations
                 column: "CruiseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservations_ExperienceId",
+                name: "IX_Reservations_ParkExperienceId",
                 table: "Reservations",
-                column: "ExperienceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reservations_ParkId",
-                table: "Reservations",
-                column: "ParkId");
+                column: "ParkExperienceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_PromotionCodeId",
@@ -98,6 +121,9 @@ namespace DolphinCove.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Reservations");
+
+            migrationBuilder.DropTable(
+                name: "ParkExperience");
         }
     }
 }

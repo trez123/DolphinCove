@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DolphinCove.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230824183735_addAddonToDb")]
-    partial class addAddonToDb
+    [Migration("20230825040217_addCruiseToDb")]
+    partial class addCruiseToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,6 +46,23 @@ namespace DolphinCove.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Addons");
+                });
+
+            modelBuilder.Entity("DolphinCove.Models.Cruise", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CruiseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cruises");
                 });
 #pragma warning restore 612, 618
         }

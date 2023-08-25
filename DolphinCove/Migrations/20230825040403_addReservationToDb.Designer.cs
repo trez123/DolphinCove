@@ -4,6 +4,7 @@ using DolphinCove.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DolphinCove.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230825040403_addReservationToDb")]
+    partial class addReservationToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,7 +136,7 @@ namespace DolphinCove.Migrations
 
                     b.HasIndex("ParkId");
 
-                    b.ToTable("ParkExperiences");
+                    b.ToTable("ParkExperience");
                 });
 
             modelBuilder.Entity("DolphinCove.Models.PromotionCode", b =>
@@ -200,6 +203,9 @@ namespace DolphinCove.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ParkExperienceId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -208,9 +214,6 @@ namespace DolphinCove.Migrations
 
                     b.Property<DateTime?>("Schedule")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("SelectedParkExperienceId")
-                        .HasColumnType("int");
 
                     b.Property<string>("SpecialInstruction")
                         .HasColumnType("nvarchar(max)");
@@ -224,30 +227,11 @@ namespace DolphinCove.Migrations
 
                     b.HasIndex("CruiseId");
 
+                    b.HasIndex("ParkExperienceId");
+
                     b.HasIndex("PromotionCodeId");
 
-                    b.HasIndex("SelectedParkExperienceId");
-
                     b.ToTable("Reservations");
-                });
-
-            modelBuilder.Entity("DolphinCove.Models.SelectedParkExperience", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("SelectedExperienceId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SelectedParkId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SelectedParkExperiences");
                 });
 
             modelBuilder.Entity("DolphinCove.Models.ParkExperience", b =>
@@ -275,21 +259,21 @@ namespace DolphinCove.Migrations
                         .WithMany()
                         .HasForeignKey("CruiseId");
 
+                    b.HasOne("DolphinCove.Models.ParkExperience", "ParkExperience")
+                        .WithMany()
+                        .HasForeignKey("ParkExperienceId");
+
                     b.HasOne("DolphinCove.Models.PromotionCode", "PromotionCode")
                         .WithMany()
                         .HasForeignKey("PromotionCodeId");
-
-                    b.HasOne("DolphinCove.Models.SelectedParkExperience", "SelectedParkExperience")
-                        .WithMany()
-                        .HasForeignKey("SelectedParkExperienceId");
 
                     b.Navigation("Addon");
 
                     b.Navigation("Cruise");
 
-                    b.Navigation("PromotionCode");
+                    b.Navigation("ParkExperience");
 
-                    b.Navigation("SelectedParkExperience");
+                    b.Navigation("PromotionCode");
                 });
 #pragma warning restore 612, 618
         }

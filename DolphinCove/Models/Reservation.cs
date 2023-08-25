@@ -37,13 +37,7 @@ namespace DolphinCove.Models
         public string? EmailAddress { get; set; }
 
 
-        //Relationship
-        public int? ExperienceId { get; set; }
-        [ForeignKey("ExperienceId")]
-        public virtual Experience? Experience { get; set; }
-
-
-
+        //Relationship        
         public int? PromotionCodeId { get; set; }
         [ForeignKey("PromotionCodeId")]
         public virtual PromotionCode? PromotionCode { get; set; }
@@ -61,9 +55,10 @@ namespace DolphinCove.Models
         public virtual Cruise? Cruise { get; set; }
 
 
-        public int? ParkId { get; set; }
-        [ForeignKey("ParkId")]
-        public virtual Park? Park { get; set; }
+
+        public int? SelectedParkExperienceId { get; set; }
+        [ForeignKey("SelectedParkExperienceId")]
+        public virtual SelectedParkExperience? SelectedParkExperience { get; set; }
 
     }
 }

@@ -21,5 +21,9 @@ namespace DolphinCove.Data
         public DbSet<Park> Parks { get; set; }
 
         public DbSet<Reservation> Reservations { get; set; }
+
+        public DbSet<ParkExperience> ParkExperiences { get; set; }
+
+        public DbSet<SelectedParkExperience> SelectedParkExperiences { get; set; }
     }
 }
