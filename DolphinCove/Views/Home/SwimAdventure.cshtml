@@ -65,26 +65,26 @@
 <div class="col-10 row  justify-content-center">
 
     <div class="col-6">
-        <img src="https://www.dolphincoveja.com/Content/src/programs/OR/SWIM/SWIM-1.jpg" class="img-fluid" />
+        <img src=" @ViewData["ExperienceImage1"]" class="img-fluid" />
     </div>
 
     <div class="col-6">
 
         <div class=" row"> 
 
-            <img src="https://www.dolphincoveja.com/Content/src/programs/OR/SWIM/SWIM-2.jpg" class="img-fluid" /> 
+            <img src="@ViewData["ExperienceImage2"]" class="img-fluid" />
 
         </div>
         <div class="row cust_mt">
                 <div class="col-6">
 
-                    <img src="https://ik.imagekit.io/shoutakutaru/SWIM-3.jpg?updatedAt=1692635135781" class="img-fluid" />
+                <img src="@ViewData["ExperienceImage3"]" class="img-fluid" />
 
                 </div>
 
                 <div class="col-6">
 
-                 <img src="https://www.dolphincoveja.com/Content/src/programs/OR/SWIM/SWIM-4.jpg" class="img-fluid" />
+                <img src="@ViewData["ExperienceImage4"]" class="img-fluid" />
                 </div>
 
                 </div>
@@ -104,6 +104,7 @@
                 <li><strong>$119.2 USD</strong></li>
         </ul>
         </div>
+            <p>Experience Image 1: @ViewData["ExperienceImage1"]</p>
         <div class="col-4">
             <ul class="custom-list">
                 <li><b>Kid Admission</b>  <br />Price from: <span style="text-decoration: line-through;"><small>$119 USD</small></span></li>
