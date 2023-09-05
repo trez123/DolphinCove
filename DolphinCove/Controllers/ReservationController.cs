@@ -1,5 +1,7 @@
 ﻿using DolphinCove.Data;
 using DolphinCove.Models;
+using DolphinCove.Models.ViewModels;
+using DolphinCove.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -17,8 +19,6 @@ namespace DolphinCove.Controllers
         {
             _dbx = dbx;
         }
-
-
 
         [HttpGet]
         public IActionResult Index()
@@ -39,7 +39,6 @@ namespace DolphinCove.Controllers
 
         }
 
-
         [HttpPost]
         public IActionResult Index(int id)
         {
@@ -51,7 +50,6 @@ namespace DolphinCove.Controllers
 
             return View();
         }
-
        
         [HttpPost]
         public IActionResult GetExperienceNames(int selectedParkId)
@@ -69,58 +67,73 @@ namespace DolphinCove.Controllers
             return Json(experienceNamesAndIds);
         }
 
+        //[HttpPost]
+        //public IActionResult SaveToDb(int selectedParkId, int experience, DateTime schedule_time, DateTime schedule_date, string adultNumber, string childrenNumber, string infantNumber)
+        //{
+
+        //    var reservationExists = _dbx.Reservations.Any(x => x.Date == schedule_time);
+
+        //    if (!reservationExists)
+        //    {
+
+        //        var selectedParkExperience = new SelectedParkExperience
+        //        {
+        //            SelectedParkId = selectedParkId,
+        //            SelectedExperienceId = experience
+        //        };
+
+        //        _dbx.SelectedParkExperiences.Add(selectedParkExperience);
+        //        _dbx.SaveChanges();
+
+        //        // Get the ID of the selected park experience.
+        //        var selParkExperience = _dbx.SelectedParkExperiences.FirstOrDefault(x => x.SelectedParkId == selectedParkId && x.SelectedExperienceId == experience);
+
+        //        var selectedParkExperienceId = selectedParkExperience.Id;
 
 
+        //        // Save the reservation to the database
+        //        var radioSelection = new MasterReservation
+        //        {
+        //            SelectedParkExperienceId = selectedParkExperienceId,
+        //            Date = schedule_time,
+        //            Schedule = schedule_date,
+        //            AdultParticipant = adultNumber,
+        //            ChildParticipant = childrenNumber,
+        //            InfantParticipant = infantNumber
 
 
+        //        };
+        //        _dbx.Reservations.Add(radioSelection);
+        //        _dbx.SaveChanges();
+        //    }
 
-        [HttpPost]
-        public IActionResult SaveToDb(int selectedParkId, int experience, DateTime schedule_time, DateTime schedule_date, string adultNumber, string childrenNumber, string infantNumber)
+        //    return RedirectToAction("Index");
+        //}
+
+        public IActionResult Step1(int id)
         {
-
-            var reservationExists = _dbx.Reservations.Any(x => x.Date == schedule_time);
-
-            if (!reservationExists)
+            List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
+            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(AppConst.CartSession) != null
+                && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(AppConst.CartSession).Count() > 0)
             {
-
-                var selectedParkExperience = new SelectedParkExperience
-                {
-                    SelectedParkId = selectedParkId,
-                    SelectedExperienceId = experience
-                };
-
-                _dbx.SelectedParkExperiences.Add(selectedParkExperience);
-                _dbx.SaveChanges();
-
-                // Get the ID of the selected park experience.
-                var selParkExperience = _dbx.SelectedParkExperiences.FirstOrDefault(x => x.SelectedParkId == selectedParkId && x.SelectedExperienceId == experience);
-
-                var selectedParkExperienceId = selectedParkExperience.Id;
-
-
-                // Save the reservation to the database
-                var radioSelection = new Reservation
-                {
-                    SelectedParkExperienceId = selectedParkExperienceId,
-                    Date = schedule_time,
-                    Schedule = schedule_date,
-                    AdultParticipant = adultNumber,
-                    ChildParticipant = childrenNumber,
-                    InfantParticipant = infantNumber
-
-
-                };
-                _dbx.Reservations.Add(radioSelection);
-                _dbx.SaveChanges();
+                shoppingCartList = HttpContext.Session.Get<List<ShoppingCart>>(AppConst.CartSession);
             }
 
-            return RedirectToAction("Index");
+            ParkExperienceVM experienceVM = new ParkExperienceVM()
+            {
+                ExistsInCart = false
+            };
+
+            //Checks if the current experienceId is in the cart
+            foreach (var item in shoppingCartList)
+            {
+                //if (item.ExperienceId == Id)
+                //{
+                //    experienceVM.ExistsInCart = true;
+                //}
+            }
+            return View(); //the view that should be in this is the first page of the reservation steps
         }
-
-
-
-
-
     }
 
 }

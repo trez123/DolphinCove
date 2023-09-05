@@ -4,6 +4,7 @@ using DolphinCove.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DolphinCove.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230826011837_JaheimUpdateModels")]
+    partial class JaheimUpdateModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,6 +84,7 @@ namespace DolphinCove.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ExperienceImage1")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ExperienceImage2")
@@ -96,14 +100,9 @@ namespace DolphinCove.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ParkId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ExperienceAddonsId");
-
-                    b.HasIndex("ParkId");
 
                     b.ToTable("Experiences");
                 });
@@ -218,9 +217,6 @@ namespace DolphinCove.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("DropdownImage")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ParkName")
                         .IsRequired()
@@ -381,13 +377,7 @@ namespace DolphinCove.Migrations
                         .WithMany()
                         .HasForeignKey("ExperienceAddonsId");
 
-                    b.HasOne("DolphinCove.Models.Park", "Park")
-                        .WithMany()
-                        .HasForeignKey("ParkId");
-
                     b.Navigation("ExperienceAddons");
-
-                    b.Navigation("Park");
                 });
 
             modelBuilder.Entity("DolphinCove.Models.ExperienceAddon", b =>

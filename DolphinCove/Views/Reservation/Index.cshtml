@@ -1,5 +1,6 @@
-﻿@model IEnumerable<DolphinCove.Models.Park>
-@{
+﻿ @model IEnumerable<DolphinCove.Models.Park> 
+@* @model DolphinCove.Models.ViewModels.ParkExperienceVM
+ *@{
     ViewData["Title"] = "Index";
 }
 
@@ -206,8 +207,9 @@
 
 
             </div>
-
-            <button id="bookNowBtn" type="submit">Book Now</button>
+            
+@*                 <button id="bookNowBtn" asp-route-id="@Model.ExperienceId   " class="btn btn-info form-control btn-lg" type="submit">Book Now</button>
+ *@            
         </div>
     </form>
 

@@ -1,0 +1,74 @@
+﻿@model DolphinCove.Models.Experience
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Experience</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ParkId" class="control-label"></label>
+                <select asp-for="ParkId" class="form-control" asp-items="ViewBag.ParkId"></select>
+                <span asp-validation-for="ParkId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExperienceName" class="control-label"></label>
+                <input asp-for="ExperienceName" class="form-control" />
+                <span asp-validation-for="ExperienceName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdultPrice" class="control-label"></label>
+                <input asp-for="AdultPrice" class="form-control" />
+                <span asp-validation-for="AdultPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChildPrice" class="control-label"></label>
+                <input asp-for="ChildPrice" class="form-control" />
+                <span asp-validation-for="ChildPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExperienceImage1" class="control-label"></label>
+                <input asp-for="ExperienceImage1" class="form-control" />
+                <span asp-validation-for="ExperienceImage1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExperienceImage2" class="control-label"></label>
+                <input asp-for="ExperienceImage2" class="form-control" />
+                <span asp-validation-for="ExperienceImage2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExperienceImage3" class="control-label"></label>
+                <input asp-for="ExperienceImage3" class="form-control" />
+                <span asp-validation-for="ExperienceImage3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExperienceImage4" class="control-label"></label>
+                <input asp-for="ExperienceImage4" class="form-control" />
+                <span asp-validation-for="ExperienceImage4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExperienceAddonsId" class="control-label"></label>
+                <select asp-for="ExperienceAddonsId" class="form-control" asp-items="ViewBag.ExperienceAddonsId"></select>
+                <span asp-validation-for="ExperienceAddonsId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

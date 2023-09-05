@@ -1,0 +1,1190 @@
+﻿@model DolphinCove.Models.Park
+
+@{
+    ViewData["Title"] = "Details";
+    // List<Park> parks = ViewData["ParksList"] as List<Park>;
+    var parksList = ViewData["ParksList"] as List<Park>;
+}
+
+<h1>Details</h1>
+
+@* <div>
+    <h4>Park</h4>B
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ParkName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ParkName)
+        </dd>
+    </dl>
+</div> *@
+@switch (Model.Id){
+    case 4:
+        <div>
+            <div class="">
+                <img class="banner-box" src="~/image/banner.jpg" />
+            </div>
+
+            <div class="img-gallery">
+                <ul>
+                    <li>
+                        <img class="gallery1" src="~/image/gallery1.jpg" />
+                    </li>
+                    <li>
+                        <img class="gallery1" src="~/image/gallery2.jpg" />
+                    </li>
+                    <li>
+                        <img class="gallery1" src="~/image/gallery3.jpg" />
+                    </li>
+                    <li>
+                        <img class="gallery1" src="~/image/gallery4.jpg" />
+                    </li>
+                    <li>
+                        <img class="gallery1" src="~/image/gallery4.jpg" />
+                    </li>
+                </ul>
+            </div>
+
+            <div class="form-ochi">
+                <h1>
+                    <form asp-action="SaveToDb" method="post" id="" class="form-wrapper2">
+                        <div class="make-reservation-text-container">
+                            <h1>MAKE YOUR RESERVATION</h1>
+                        </div>
+                        <div class="form-wrapper">
+                            <div class="choose-location">
+                                <div class="choose-loc-cont">
+                                    <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
+                                    <label id="choose-location-text">Choose the location</label>
+                                </div>
+
+
+                                <div class="select-location-box-part">
+                                    <span>
+                                        <p id="selected-radio-text">Select location</p>
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+
+
+                                <div id="overlay-div" style="display: none;">
+                                    <div class="overlay-choose-location">
+                                        <p>Choose the Location</p>
+                                        <button>
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="radio-location">
+                                        
+                                        @foreach (var park in parksList)
+                                        {
+                                            <div class="radbtn">
+                                                                                                @* was initially @park.Id and @park.parkname *@
+                                                <input type="radio" name="selectedParkId" value="@Model.Id" /> @Model.ParkName 
+                                            </div>
+                                        }
+                                    </div>
+
+                                    <button type="button" id="getExperienceButton" onclick="getSelectedRadioButtonText()" style="margin-top: 40px;">Select Location</button>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="choose-activity" style="display: none;">
+                                <div class="choose-loc-cont">
+                                    <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
+                                    <label id="lblActivity">Choose the activity</label>
+                                </div>
+
+
+                                <div class="select-activity-box-part">
+                                    <div>
+                                        <p id="selected-activity-radio-text">Select Activity</p>
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+
+
+                                <div id="overlay-div2" style="display: none;">
+                                    <div class="overlay-choose-activity">
+                                        <p>Choose the Activity</p>
+                                        <button>
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+
+                                    <button type="button" id="getExperienceButton2" onclick="getSelectedRadioButtonText2()" style="margin-top: 40px;">Select Activity</button>
+                                    <div id="experienceNamesContainer"></div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="schedule-date">
+                                <div class="select-date">
+                                    <div class="choose-loc-cont">
+                                        <i class="fa fa-calendar fa-lg" aria-hidden="true"></i>
+                                        <label id="lblDate">Date</label>
+                                    </div>
+
+                                    <div class="select-date-box-part">
+                                        <div>
+                                            <p id="selectedDate">- - Choose - -</p>
+                                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+
+                                    <div id="overlay-div3" style="display: none;">
+                                        <div class="overlay-choose-date">
+                                            <p>Choose the Date</p>
+                                            <button>
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+
+
+                                        <button type="button" id="getExperienceButton2" onclick="getSelectedRadioButtonText2()" style="margin-top: 40px;">Select your date</button>
+                                        @*<div id="experienceNamesContainer"></div>*@
+
+                                        <input type="date" id="dateInput" name="schedule_date" />
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+                                <div class="select-schedule">
+                                    <div class="choose-loc-cont">
+                                        <i class="fas fa-clock fa-lg" aria-hidden="true"></i>
+                                        <label id="lblSchedule">Schedule</label>
+                                    </div>
+
+
+                                    <div class="select-schedule-box-part">
+                                        <div>
+                                            <p id="selectedScheduleTime">- - Choose - -</p>
+                                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+
+
+                                    <div id="overlay-div4" style="display: none;">
+                                        <div class="overlay-choose-schedule">
+                                            <p>Choose the Schedules</p>
+                                            <button>
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+
+
+                                        <div>
+                                            <input type="radio" id="first-time" name="schedule_time" value="10:15">
+                                            <label for="first-time">10:15</label><br>
+
+                                            <input type="radio" id="second-time" name="schedule_time" value="11:45">
+                                            <label for="second-time">11:45</label>
+                                        </div>
+
+                                        <button type="button" id="getExperienceButton3" onclick="getSelectedRadioButtonText3()" style="margin-top: 40px;">Select your date</button>
+                                        @*<div id="experienceNamesContainer"></div>*@
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="select-partipants">
+                                <div class="choose-loc-cont">
+                                    <i class="fas fa-user-friends fa-lg" aria-hidden="true"></i>
+                                    <label id="lblParticipants">Participants</label>
+                                </div>
+
+                                <div class="select-participants-box-part">
+                                    <div>
+                                        <p id="selectedAmountOfParticipants">- - Choose - -</p>
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+
+                                <div id="overlay-div5" style="display: none;">
+                                    <div class="overlay-choose-participants">
+                                        <button>
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+
+                                    <div>
+                                        <p style="margin-top: 90px;">Adults</p>
+                                        <div>
+                                            <input type="number" id="amtAdults" min="1" value="2" name="adultNumber" />
+                                        </div>
+
+                                        <p>Children</p>
+                                        <div>
+                                            <input type="number" id="amtChildren" min="0" value="0" name="childrenNumber" />
+                                        </div>
+
+                                        <p>Infants (1 - 5 years *Free)</p>
+                                        <div>
+                                            <input type="number" id="amtInfants" min="0" value="0" name="infantNumber" />
+                                        </div>
+                                    </div>
+
+
+                                    <button type="button" id="getExperienceButton4" onclick="getSelectedRadioButtonText4()" style="margin-top: 40px;">Select your participants</button>
+                                    @*<div id="experienceNamesContainer"></div>*@
+                                </div>
+
+
+                            </div>
+@*                             <button id="bookNowBtn" asp-route-id="@Model.ExperienceId   " class="btn btn-info form-control btn-lg" type="submit">Book Now</button>
+ *@                        </div>
+                    </form>
+                </h1>
+            </div>
+            <div class="under-form">
+                <ul>
+                    <li>
+                        <img src="~/image/american-xpress.svg" />
+                    </li>
+                    <li>
+                        <img src="~/image/visa.svg" />
+                    </li>
+                    <li>
+                        <img src="~/image/mastercard.svg" />
+                    </li>
+                    <li>
+                        <img src="~/image/paypal.svg" />
+                    </li>
+                </ul>
+            </div>
+
+            <div class="all-info">
+                <div class="text-cont">
+                    <h2>Dolphin Cove Ocho Rios</h2>
+                    <p class="para">
+                        Ocho Ríos is a quintessential city that welcomes cruise travelers
+                        with white sandy beaches<br /> and swaying palm trees, where Dolphin
+                        Cove Ocho Ríos, a fantastic Dolphin Habitat and<br /> natural park framed by majestic lush tropical nature, is located.<br /><br />
+                    </p>
+
+                    <p class="para">
+                        Perfectly appointed in the northeast area of Jamaica and only 4 km from the
+                        Cruise<br /> Terminal at Turtle Beach Road, Dolphin Cove Ocho Ríos is a superb option to start your<br /> vacation in Jamaica.<br /><br />
+                    </p>
+
+                    <p class="para">
+                        From the very first moment you step into Dolphin Cove Ocho Ríos, you will feel the<br /> Jamaican vibe with a sumptuous
+                        natural backdrop to kick back in the pool or delight with<br /> traditional and freshly brewed Jamaican coffee.<br /><br />
+                    </p>
+
+                    <p class="para">
+                        Unleash your adventurous spirit and get ready to enjoy one of the most fantastic<br /> experiences in a swim with Dolphins
+                        in Ocho Rios and exploring this extraordinary natural<br /> park in Jamaica.<br /><br />
+                    </p>
+
+
+                </div>
+                <div class="stick-head">
+                    <h2>With your interactive program paid admission at Dolphin<br /> Cove Ocho Ríos, you get:</h2><br />
+                </div>
+                <div class="checks">
+                    <ul class="unordered">
+                        <li><img src="~/image/icon-check.svg" width="15px" />Jungle trail.</li>
+                        <li><img src="~/image/icon-check.svg" width="15px" />Lunch.</li>
+                        <li><img src="~/image/icon-check.svg" width="15px" />Cawabunga water slide.</li>
+                        <li><img src="~/image/icon-check.svg" width="15px" />Kayaks.</li>
+                        <li><img src="~/image/icon-check.svg" width="15px" />Stingrays interactive program.</li>
+                        <li><img src="~/image/icon-check.svg" width="15px" />Beach Club.</li>
+                        <li><img src="~/image/icon-check.svg" width="15px" />Dunn's River Falls Experience (swimming at the river falls and cultural activities).</li>
+                        <li><img src="~/image/icon-check.svg" width="15px" />Activities with the marine species of your choice in their natural environment.</li>
+                        <li><img src="~/image/icon-check.svg" width="15px" />Use of facilities and showers</li>
+                    </ul>
+                </div>
+
+
+                <div class="text-cont2">
+                    <p class="para">
+                        During your visit to Dolphin Cove Ocho Ríos, before or after your interactive program with<br /> Dolphins or sharks, you will enjoy
+                        the natural paths across the park where nature meets<br /> sun-and-fun moments.<br /><br />
+                    </p>
+                    <p class="para">
+                        Discover the most incredible tropical species, including iguanas and birds, and a great<br /> diversity of flowers and colorful trees.<br /><br />
+                    </p>
+                    <p class="para">
+                        Get prepared to indulge your senses in a tropical scene and have an unforgettable time<br /> with your loved ones in an idyllic place like Dolphin Cove Ocho Ríos in Jamaica!<br /><br />
+                    </p><br />
+                    <h2>Buy Now Your Interactive Experience at Dolphin Cove<br /> Ocho Ríos!</h2>
+                    <br />
+                </div>
+
+
+                <div class="checks">
+                    <ul class="unordered">
+                        <li><img src="~/image/icon-check.svg" width="15px" />Admission Plus</li>
+                        <li><img src="~/image/icon-check.svg" width="15px" />Shark Encounter</li>
+                        <li><img src="~/image/icon-check.svg" width="15px" />Yaaman + Dolphin Encounter</li>
+                        <li><img src="~/image/icon-check.svg" width="15px" />Dolphin Encounter</li>
+                        <li><img src="~/image/icon-check.svg" width="15px" />Dolphin Swim Adventure</li>
+                        <li><img src="~/image/icon-check.svg" width="15px" />Dolphin Royal Swim</li>
+                    </ul>
+                </div>
+
+                <h2 class="heads">Select your Experience</h2><br /><br />
+
+                <div class="encounter-container">
+                    <div class="all">
+                        <div class="encount-list">
+                            <img id="size" src="~/image/swim-adventure-dunns.jpg" />
+                            <div class="info-cont">
+                                <p id="encount-info">Dolphin Swim Adventure</p>
+                                <h5 id="encount-num1">$149 USD</h5>
+                                <h6 id="encount-num">$119.2 USD</h6>
+                            </div>
+                        </div>
+                        <div>
+                            <img id="size" src="~/image/shark-encounter.jpg" />
+                            <div class="info-cont2">
+                                <p id="encount-info">Shark Encounter</p>
+                                <h5 id="encount-sum">$69 USD</h5>
+                            </div>
+
+                        </div>
+                        <div class="encount-list">
+                            <img id="size" src="~/image/royal-swim-dunns.jpg" />
+                            <div class="info-cont">
+                                <p id="encount-info">Encounter</p>
+                                <h5 id="encount-num1">$119 USD</h5>
+                                <h6 id="encount-num">$95.2 USD</h6>
+                            </div>
+                        </div>
+                        <div class="encount-list">
+                            <img id="size" src="~/image/swim-adventure-dunns.jpg" />
+                            <div class="info-cont2">
+                                <p id="encount-info">Admission Plus</p>
+                                <h5 id="encount-sum">$75 USD</h5>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="encounter-container">
+                    <div class="all">
+                        <div class="encount-list">
+                            <img id="size" src="~/image/royal-swim-dunns.jpg" />
+                            <div class="info-cont">
+                                <p id="encount-info">Dolphin Royal Swim</p>
+                                <h5 id="encount-num1">$189 USD</h5>
+                                <h6 id="encount-num">$151.2 USD</h6>
+                            </div>
+                        </div>
+                        <div class="encount-list">
+                            <img id="size" src="~/image/swim-adventure-dunns.jpg" />
+                            <div class="info-cont2">
+                                <p id="encount-info">Yaaman + Encounter</p>
+                                <h5 id="encount-sum">$199 USD</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-info">
+                    <div class="content">
+                        <h2 class="you">How to get Ocho Rios</h2><br />
+                        <p class="para-away"><b>Visiting Dolphin Cove Ocho Ríos</b> is very easy. However, you must consider<br /> important factors such as distance and traffic.</p><br />
+
+                        <p class="para-away">
+                            <b>Dolphin Cove Ocho Ríos</b> is located 4 km (2.5 mi) from the Cruise Terminal at<br /> Turtle Beach Road. If you are visiting Ocho Ríos
+                            as a cruise traveler or staying<br /> at a lodge, or resort in the northeast area, just take a taxi or hop on a “route<br /> taxi” and get ready for your adventure to<br /><br />
+                        </p>
+
+                        <p class="para-away">If you are staying in the Montego Bay area, we recommend you visit the<br /> Dolphin Cove Montego Bay Dolphin Habitat, as Ocho Ríos is 97 km (60 mi)<br /> away.</p>
+
+                        <a href="#"><img class="map-raw" src="~/image/map.jpg" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        break;
+    case 5:
+        <div>
+            <div class="img_wrapper">
+
+                <img class="img2" src="https://www.dolphincoveja.com/Content/src/programs/ne/locacion-Dolphin-Cove-Negril.jpg" />
+
+            </div>
+
+            <div class="Main-container">
+
+
+
+                <div class="information-Container">
+
+                    <div class="gallery">
+
+                        <div class="row2">
+
+                            <div class="img_1">
+
+                                <img class="img-3" src="https://www.dolphincoveja.com/Content/src/programs/NE/gallery/gallery1.jpg" />
+
+                            </div>
+
+
+
+                            <div classs="img_2">
+
+                                <img class="img-2" src="https://www.dolphincoveja.com/Content/src/programs/NE/gallery/gallery2.jpg" />
+
+                            </div>
+
+
+
+                            <div class="img_3">
+
+                                <img class="img-3" src="https://www.dolphincoveja.com/Content/src/programs/NE/gallery/gallery3.jpg" />
+
+                            </div>
+
+
+
+                            <div class="img_4">
+
+                                <img class="img-4" src="https://www.dolphincoveja.com/Content/src/programs/NE/gallery/gallery4.jpg" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <h1 class="h1_">Dolphin Cove Montego Bay</h1>
+
+                    <div class="location-description">
+
+                        <p class="p">
+                            Montego Bay is a piece of haven located on the North Coast of Jamaica, portraying lush natural scenes where the most coveted
+
+                            pristine and sandy white powdered beaches bathe the coastline.
+                        </p>
+
+
+
+                        <p class="p">
+                            Get ready to enjoy an epic adventure during your vacation in Montego Bay with booming water, eco-friendly activities, and trendy
+
+                            cultural spots to visit anytime. Take your family, friends, or significant other to explore the jaw-dropping beach area or enjoy a fun-filled
+
+                            getaway to Dolphin Cove Montego Bay!
+                        </p>
+
+
+
+                        <p class="p">
+                            At Dolphin Cove Montego Bay, thrilling moments are waiting with the most friendly marine mammal species in Jamaica. Discover what
+
+                            it feels like to hug and swim with a dolphin and fulfill your dream of swimming with dolphins in their natural habitat in Jamaica!
+                        </p>
+
+
+
+                        <h2 class="h2_">With your interactive program paid admission at Dolphin Cove Ocho Ríos, you get:</h2>
+
+
+
+                        <ul>
+
+                            <li class="li"><img class="li-img" src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="" width="16" height="16" padding-right="10px">Feeding the ostriches activity</li>
+
+
+
+                            <li class="li"><img class="li-img" src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="" width="16" height="16" padding-right="10px">Buffet lunch</li>
+
+
+
+                            <li class="li"><img class="li-img" src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="" width="16" height="16" padding-right="10px">Dolphin Watching at Play</li>
+
+
+
+                            <li class="li"><img class="li-img" src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="" width="16" height="16" padding-right="10px">Activities with dolphins in their natural environmen</li>
+
+
+
+                            <li class="li"><img class="li-img" src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="" width="16" height="16" padding-right="10px">Lifejackets</li>
+
+
+
+                            <li class="li"><img class="li-img" src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="" width="16" height="16" padding-right="10px">Use of facilities and showers</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </ul>
+
+
+
+                        <p class="">
+                            Start planning your vacation in Montego Bay and find the incredible plethora of engaging activities that Jamaica has
+
+                            for you, including a fun visit to Dolphin Cove Montego Bay!
+                        </p>
+
+
+
+                        <h2 class="h2_">Buy Now Your Interactive Experience at Dolphin Cove Montego Bay!</h2>
+
+
+
+                        <ul class="ul">
+
+
+
+                            <li class="li"><img class="li-img" src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="" width="16" height="16" padding-right="10px">Meet & Gree</li>
+
+
+
+                            <li class="li"><img class="li-img" src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="" width="16" height="16" padding-right="10px">Dolphin Encounter</li>
+
+
+
+                            <li class="li"><img class="li-img" src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="" width="16" height="16" padding-right="10px">Dolphin Encounter</li>
+
+
+
+                            <li class="li"><img class="li-img" src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="" width="16" height="16" padding-right="10px">Dolphin Swim Adventure</li>
+
+
+
+                            <li class="li"><img class="li-img" src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="" width="16" height="16" padding-right="10px">Dolphin Royal Swim</li>
+
+
+
+
+
+
+
+                        </ul>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="form1">
+
+                    <form>
+
+                        <input type="text" />
+
+                        <input type="text" />
+
+                        <input type="button" value="submit" />
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <section class="section1">
+
+                <h2 class="h2-">Select your experience</h2>
+
+                <div class="experience">
+
+                    <div class="exp1">
+                        <a href="">
+
+                            <img class="img-exp" src="https://www.dolphincoveja.com/Content/media/dolphin-cove-montego-bay/producto-dolphin-cove-montego-bay-dolphin-royal-swim.jpg" />
+
+                        </a>
+
+                        <div class="tittle">
+
+                            <a href="RoyalSwim" class="link">
+
+                                <h6 class="h6">Dolphin Royal Swim</h6>
+
+                                <span class="span">
+
+                                    <span style="text-decoration: line-through;font-size: 10px">$187 USD</span>
+
+                                    <br />
+
+                                    <strong>$151.2 USD</strong>
+
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="exp1">
+
+                        <a href="">
+
+                            <img class="img-exp" src="https://www.dolphincoveja.com/Content/media/dolphin-cove-montego-bay/producto-dolphin-cove-montego-bay-swim-adventure.jpg" />
+
+                        </a>
+
+                        <div class="tittle">
+
+                            <a href="Adventure" class="link">
+
+                                <h6 class="h6">Dolphin Swim Adventure</h6>
+
+                                <span class="span1">
+
+                                    <span style="text-decoration: line-through;font-size: 10px">$149 USD</span>
+
+                                    <br />
+
+                                    <strong>$119.2 USD</strong>
+
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="exp1">
+
+                        <a href="">
+
+                            <img class="img-exp" src="https://www.dolphincoveja.com/Content/media/dolphin-cove-montego-bay/producto-dolphin-cove-montego-bay-encounter.jpg" />
+
+                        </a>
+
+                        <div class="tittle">
+
+                            <div class="q1">
+
+                                <a href="" class="link">
+
+                                    <h6 class="h6">Encounter</h6>
+
+                                    <span class="span3">
+
+                                        <span style="text-decoration: line-through;font-size: 10px">$119 USD</span>
+
+                                        <br />
+
+                                        <strong>$95.2 USD</strong>
+
+                                    </span>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="section2">
+
+                <div class="Main-container-">
+
+                    <div class="location-">
+
+                        <h2 class="h2-">How to Get to Dolphin Cove Montego Bay?</h2>
+
+
+
+                        <p>
+
+                            <strong>Dolphin Cove Montego Bay</strong> is privileged located on the A1 Highway in the northwest area, in a very secluded zone, where relaxation and memorable fun
+
+                            moments will be part of your travel itinerary!
+
+                            To get here, just take a taxi from your resort, or get on board a "route taxi", the local transportation, from Montego Bay to other attractive towns
+
+                            in Jamaica
+
+                        </p>
+
+                    </div>
+
+                    <div class="img-location-container">
+
+                        <img class="location-img" src="https://www.dolphincoveja.com/Content/src/programs/NE/map.jpg" />
+
+                    </div>
+
+                </div>
+
+            </section>
+        </div>
+        break;
+    case 6:
+        <div>
+            <section class="jam-header-img">
+                <img src="https://www.dolphincoveja.com/Content/src/programs/pj/locations-moon-palace-jamaica-grande.jpg" width="1360" height="320">
+            </section>
+
+            <section class="jam-body">
+                <div class="jam-body-top-section">
+                    <div class="jam-left-body">
+                        <div class="jam-images-wrap">
+                            <img src="https://www.dolphincoveja.com/Content/src/programs/PJ/gallery/gallery1.jpg" style="width:144px; height:82px">
+                            <img src="https://www.dolphincoveja.com/Content/src/programs/PJ/gallery/gallery2.jpg" style="width:144px; height:82px">
+                            <img src="https://www.dolphincoveja.com/Content/src/programs/PJ/gallery/gallery3.jpg" style="width:144px; height:82px">
+                            <img src="https://www.dolphincoveja.com/Content/src/programs/PJ/gallery/gallery4.jpg" style="width:144px; height:82px">
+                        </div>
+                        <br><br>
+                        <h2>Moon Palace Jamaica</h2>
+                        <br><br>
+                        <p>
+                            Dolphin Cove Moon Palace is a Dolphin Habitat conveniently appointed for visitors and<br> guests that have reserved their
+                            vacation stay at Moon Palace Jamaica from Palace<br> Resorts.<br><br> At the Moon Palace Jamaica all-inclusive resort, you will
+                            enjoy the most outstanding<br> vacation time while unwinding on the pristine soft sandy beach, perfecting your tan,<br> soothing
+                            your senses, and having memorable fun moments.<br><br> Start planning your vacation in the Caribbean with<br> the experience of the
+                            best swim with Dolphins in Moon Palace Jamaica programs in a unique Dolphin Habitat.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="jam-body-wrap">
+                    <div class="jam-left-body">
+                        <br><br>
+                        <h3>With your interactive program paid admission at Dolphin<br> Cove Moon Palace, you get:</h3>
+                        <br><br>
+                        <div class="jam-list-wrap">
+                            <ul>
+                                <li><img src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" width="16" height="16">Dolphin interactive program of your choice</li>
+                                <li><img src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" width="16" height="16">Lifejacket</li>
+                                <li><img src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" width="16" height="16">Dolphin orientation to learn riveting facts about these friendly marine mammals</li>
+                                <li><img src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" width="16" height="16">Activities with Dolphins in their natural environment</li>
+                            </ul>
+                        </div>
+                        <p>
+                            Buy your Dolphin program, and don't forget to check with your Palace Vacation Planner<br> on how to use your resort credits
+                            on any of the available Dolphin programs to enhance<br> your vacations at Moon Palace Jamaica!
+                        </p>
+                        <h3 style="margin-top: 0px; padding-top: 10px;">Buy Now Your Interactive Experience at Dolphin Cove<br> Montego Bay!</h3>
+                        <br><br>
+                        <div class="jam-list-wrap">
+                            <ul>
+                                <li><img src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" width="16" height="16">Dolphin Encounter</li>
+                                <li><img src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" width="16" height="16">Dolphin Swim Adventure</li>
+                                <li><img src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" width="16" height="16">Dolphin Royal Swim</li>
+                            </ul>
+                        </div>
+                        <h3 style="margin-top: 0px; padding-top: 5px; padding-bottom: 35px;">Select your experience</h3>
+                        <div class="jam-images-wrap2">
+                            <div class="jam-images-box">
+                                <a href="https://www.dolphincoveja.com/Parks/moon-palace-jamaica/palace-dolphin-ultimate-swim">
+                                    <img src="https://www.dolphincoveja.com/Content/media/dolphin-cove-montego-bay/producto-dolphin-cove-montego-bay-dolphin-royal-swim.jpg" height="155px" width="255px">
+                                    <p>Dolphin Royal Swim &nbsp; &nbsp; &nbsp; <span style="text-align:right">$199 USD</span> </p>
+                                </a>
+                            </div>
+                            <div class="jam-images-box">
+                                <a href="https://www.dolphincoveja.com/Parks/moon-palace-jamaica/palace-dolphin-encounter">
+                                    <img src="https://www.dolphincoveja.com/Content/media/dolphin-cove-montego-bay/producto-dolphin-cove-montego-bay-encounter.jpg" height="155px" width="255px">
+                                    <p>Encounter &nbsp; &nbsp; &nbsp; <span style="text-align:right">$99 USD</span></p>
+                                </a>
+
+                            </div>
+                            <div class="jam-images-box">
+                                <a href="https://www.dolphincoveja.com/Parks/moon-palace-jamaica/palace-dolphin-swim">
+                                    <img src="https://www.dolphincoveja.com/Content/media/dolphin-cove-montego-bay/producto-dolphin-cove-montego-bay-swim-adventure.jpg" height="155px" width="255px">
+                                    <p>Dolphin Swim Adventure &nbsp; &nbsp; &nbsp; <span style="text-align:right">$149 USD</span></p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="jam-bottom-row">
+                    <div class="jam-bottom-row-wrap">
+                        <h1>How to Get to Dolphin Cove Moon Palace Jamaica?</h1>
+                        <p>
+                            The Moon Palace Jamaica all-inclusive resort is in the Ocho Ríos area.<br> However, we recommend you
+                            fly to the Montego Bay International Airport<br> (MBJ), located 86 km (53 mi) away.<br><br> At the airport,
+                            you will find many shuttles or private transfers to your hotel if<br> you didn’t book it in advance.
+                        </p>
+                    </div>
+                    <div class="jam-bottom-row-wrap">
+                        <img src="https://www.dolphincoveja.com/Content/src/programs/PJ/map.jpg" width="452px" height="266px">
+                    </div>
+                </div>
+            </section>
+        </div>
+        break;
+    case 7:
+        <div>
+            <div><img class="img-fluid" src="https://www.dolphincoveja.com/Content/src/programs/ps/dolphincove-bannerlocacion.jpg" alt="Puerto Seco Beach image"></div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="w-50 d-flex gx-4">
+                            <div class="w-25">
+                                <img class="img-fluid" src="https://www.dolphincoveja.com/Content/src/programs/PS/gallery/gallery1.jpg">
+                            </div>
+                            <div class="w-25">
+                                <img class="img-fluid" src="https://www.dolphincoveja.com/Content/src/programs/PS/gallery/gallery2.jpg">
+                            </div>
+                            <div class="w-25">
+                                <img class="img-fluid" src="https://www.dolphincoveja.com/Content/src/programs/PS/gallery/gallery3.jpg">
+                            </div>
+                            <div class="w-25">
+                                <img class="img-fluid" src="https://www.dolphincoveja.com/Content/src/programs/PS/gallery/gallery4.jpg">
+                            </div>
+                        </div>
+
+                        <h1 class="title3">Dolphin Cove in Puerto Seco Beach</h1>
+                        <p class="paragraph1">
+                            Puerto Seco Beach is one of the most beckoning places
+                            in Jamaica for its pristine coastline, where you and your family will
+                            enjoy great water activities, have fun in the sun, and have the chance
+                            to swim with Dolphins in Puerto Seco!<br><br>
+
+                            This impressive beach club is on a 10-acre property boasting diverse
+                            restaurants, kid-friendly activities, and other fun options to enjoy
+                            endless-fun watersports like scuba diving and paddle boards, and home
+                            to Dolphin Cove Puerto Seco. Also, a fascinating fact is that Puerto
+                            Seco Beach was the first spot where Christopher Columbus docked in Jamaica.<br>
+                            <h1 class="title2">With your interactive program paid admission at Dolphin Cove Puerto Seco, you get:</h1>
+
+                        <p class="paragraph1"><img src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="tick" style="margin: 0 0.5vw 0 3vw; width: 1vw;"> Dolphin interactive program of your choice.</p>
+                        <p class="paragraph1"><img src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="tick" style="margin: 0 0.5vw 0 3vw; width: 1vw;">Lifejacket.</p>
+                        <p class="paragraph1"><img src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="tick" style="margin: 0 0.5vw 0 3vw; width: 1vw;">Dolphin orientation to learn riveting facts about these friendly marine mammals.</p>
+                        <p class="paragraph1"><img src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="tick" style="margin: 0 0.5vw 0 3vw; width: 1vw;"> Activities with Dolphins in their natural environment.</p>
+                        <p class="paragraph1">Share unforgettable moments with your loved ones at Dolphin Cove Puerto Seco, and get ready to unwind and have a blast on your upcoming vacations in Jamaica!</p>
+
+                        <h1 class="title2">Buy Now Your Interactive Experience at Dolphin Cove Puerto Seco!</h1>
+
+                        <p class="paragraph1"><img src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="tick" style="margin: 0 0.5vw 0 3vw; width: 1vw;">Dolphin Encounter</p>
+                        <p class="paragraph1"><img src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="tick" style="margin: 0 0.5vw 0 3vw; width: 1vw;">Dolphin Swim Adventure</p>
+                        <p class="paragraph1"><img src="https://www.dolphincoveja.com/Content/img/icons/icon-check.svg" alt="tick" style="margin: 0 0.5vw 0 3vw; width: 1vw;">Dolphin Royal Swim</p>
+                        <br>
+                        <h1 class="title">Select your experience</h1>
+
+                    </div>
+                    <div>
+                        <div class="reservation">
+                            <h1 class="reservation-title">
+                                MAKE YOUR RESERVATION<h1>
+                                    <div class="activity-container">
+                                        <p class="activity"> <i style="font-size: 1.2vw; margin-right: 0.5vw;" class="fa fa-location-arrow"></i>Choose The activity</p>
+                                        <select id="activity-option">
+                                            <option value="0">Select activity</option>
+                                            <option value="1"> Dolphin Swim Adventure</option>
+                                            <option value="2"> Dolphin Royal Swim</option>
+                                            <option value="3"> Shark Encounter</option>
+                                            <option value="4">Encounter</option>
+                                            <option value="5">Admission Plus</option>
+                                        </select>
+                                        <div class="date">
+                                            <div>
+                                                <p class="activity"><i style="font-size: 1.2vw; margin-right: 0.5vw;" class="fa fa-calendar"></i>Date</p>
+                                                <input class="date-input" type="date" placeholder="--Choose--">
+                                            </div>
+                                            <div>
+                                                <p class="activity"><i style="font-size: 1.2vw; margin-right: 0.5vw;" class="fa fa-clock-o"></i>Schedule</p>
+                                                <select id="activity-option">
+                                                    <option value="0">--Choose--</option>
+                                                    <option value="1"> Dolphin Swim Adventure</option>
+                                                    <option value="2"> Dolphin Royal Swim</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <p class="activity"><i style="font-size: 1.2vw; margin-right: 0.5vw;" class="fa fa-users"></i>Participants</p>
+                                        <input class="participants" type="number">
+                                        <button class="book-now">Book Now</button>
+                                    </div>
+
+                        </div>
+                        <div class="col">
+                            <img src="https://www.dolphincoveja.com/Booking/Img/american-xpress.svg">
+                            <img src="https://www.dolphincoveja.com/Booking/Img/visa.svg">
+                            <img src="https://www.dolphincoveja.com/Booking/Img/mastercard.svg">
+                            <img src="https://www.dolphincoveja.com/Booking/Img/paypal.svg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery">
+                <div class="gallery-image">
+                    <div class="gallery-container">
+                        <img src="https://www.dolphincoveja.com/Content/media/dolphin-cove-montego-bay/producto-dolphin-cove-montego-bay-dolphin-royal-swim.jpg">
+                    </div>
+                    <div class="label"><h3 class="gallery-label-2">Dolphin Encounter<span class="price">$99 USD</span></h3></div>
+                </div>
+                <div class="gallery-image">
+                    <div class="gallery-container">
+                        <img src="https://www.dolphincoveja.com/Content/media/dolphin-cove-montego-bay/producto-dolphin-cove-montego-bay-swim-adventure.jpg">
+                    </div>
+                    <div class="label"><h3 class="gallery-label-2">Dolphin Swim Adventure<span class="price">$139 USD</span></h3></div>
+                </div>
+                <div class="gallery-image">
+                    <div class="gallery-container">
+                        <img src="https://www.dolphincoveja.com/Content/media/dolphin-cove-montego-bay/producto-dolphin-cove-montego-bay-encounter.jpg">
+                    </div>
+                    <div class="label"><h3 class="gallery-label-2">Dolphin Royal Swim<span class="price">$179 USD</span></h3></div>
+                </div>
+            </div>
+            <div class="location">
+                <div class="section3">
+                    <h2 class="title4">How to Get to Dolphin Cove Puerto Seco?</h2>
+                    <p class="paragraph2">Dolphin Cove Puerto Seco is in the Discovery Bay area, 63 km(39 mi) from the Sangster International Airport in Montego Bay.</p>
+                    <p class="paragraph2">Getting to Puerto Seco Beach is effortless from any villa or hotel in Discovery Bay. Hop on a local bus or get the “route taxi” in the surrounding towns through A1 Highway.</p>
+                </div>
+                <img id="img4" src="https://www.dolphincoveja.com/Content/src/programs/PS/map.jpg">
+            </div>
+        </div>
+        break;
+}
+@* <div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div> *@
+
+
+
+@section Scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $(".select-location-box-part").click(function () {
+                $("#overlay-div").show();
+            });
+
+            $("#overlay-div > .overlay-choose-location > button").click(function () {
+                $("#overlay-div").hide();
+            });
+        });
+
+
+
+        //$(document).ready(function () {
+        //    $(`#getExperienceButton`).click(function () {
+        //        var selectedParkId = $(`input[name='selectedParkId']:checked`).val();
+        //        console.log(selectedParkId);
+
+        //        $.post(`@Url.Action("GetExperienceNames", "Reservation")`, { selectedParkId: selectedParkId }, function (data) {
+        //            var experienceNamesHtml = `<h4>Experience Names:</h4>`;
+        //            $.each(data, function (index, experienceName) {
+        //                experienceNamesHtml += `<input type="radio" name="experienceName" value="` + experienceName + `" />` + experienceName + `<br/>`;
+        //            });
+
+        //            $(`#experienceNamesContainer`).html(experienceNamesHtml);
+        //        });
+
+        //        console.log(selectedParkId);
+               
+        //    });
+        //});
+
+
+
+        $(document).ready(function () {
+            $(`#getExperienceButton`).click(function () {
+                var selectedParkId = $(`input[name='selectedParkId']:checked`).val();
+                console.log(selectedParkId);
+                $.post(`@Url.Action("GetExperienceNames", "Reservation")`, { selectedParkId: selectedParkId }, function (data) {
+                    var experienceNamesHtml = `<h4>Experience Names:</h4>`;
+                    $.each(data, function (index, experienceNames) {
+                        //console.log(experienceNames)
+                        const experienceIdInt = parseInt(experienceNames.experienceId);
+                        console.log(experienceIdInt)
+
+                        experienceNamesHtml += `<input type="radio" name="experience" value="${experienceIdInt}">${experienceNames.experienceName}<br/>`;
+
+                    });
+                    $(`#experienceNamesContainer`).html(experienceNamesHtml);
+
+                    var div3 = document.getElementsByClassName("choose-activity")[0];
+                    div3.style.display = "block";
+
+                    // Hide the div after updating its content
+                    $(`#overlay-div`).hide();
+                });
+                console.log(selectedParkId);
+            });
+        });
+
+
+        $(document).ready(function () {
+            $(`#getExperienceButton2`).click(function () {
+                var selectedParkId = $(`input[name='selectedParkId']:checked`).val();
+                console.log(selectedParkId);
+                $.post(`@Url.Action("GetExperienceNames", "Reservation")`, { selectedParkId: selectedParkId }, function (data) {
+                    console.log(data)
+                    var experienceNamesHtml = `<h4>Experience Names:</h4>`;
+                    $.each(data, function (index, experienceName) {
+                        //console.log(`${experienceId}`)
+                        const experienceIdInt = parseInt(experienceName.experienceId);
+
+                        // Now you have the experienceId as an integer
+                        //console.log(typeof experienceIdInt); // Output: "number"
+
+                        experienceNamesHtml += `<input type="radio" name="experience" value="${experienceIdInt}">${experienceName.experienceName}<br/>`;
+                        ////console.log(typeof (`${ experienceName.experienceId}`))
+                    });
+                    $(`#experienceNamesContainer`).html(experienceNamesHtml);
+             
+                    // Hide the div after updating its content
+                    $(`#overlay-div2`).hide();
+                    
+                });
+                
+                console.log(selectedParkId);
+            });
+        });
+        
+
+          
+
+
+        $(function () {
+            $(".select-activity-box-part").click(function () {
+                $("#overlay-div2").show();
+            });
+
+            $("#overlay-div2 > .overlay-choose-activity > button").click(function () {
+                $("#overlay-div2").hide();
+            });
+        });
+
+        
+        function getSelectedRadioButtonText() {
+            var selectedRadioButton = document.querySelector('input[name="selectedParkId"]:checked');
+            var selectedPark = selectedRadioButton.nextSibling.nodeValue;
+            document.getElementById('selected-radio-text').textContent = selectedPark;
+        }
+
+        function getSelectedRadioButtonText2() {
+            var selectedRadioButton2 = document.querySelector('input[name="experience"]:checked');
+            var selectedPark2 = selectedRadioButton2.nextSibling.nodeValue;
+            document.getElementById('selected-activity-radio-text').textContent = selectedPark2;
+        }
+
+
+
+        //for the date overlay
+        $(function () {
+            $(".select-date-box-part").click(function () {
+                $("#overlay-div3").show();
+            });
+
+            $("#overlay-div3 > .overlay-choose-date > button").click(function () {
+                $("#overlay-div3").hide();
+            });
+        });
+
+
+        document.getElementById("dateInput").addEventListener("change", function () {
+            var selectedDate = document.getElementById("dateInput").value;
+
+            document.getElementById("selectedDate").innerText = selectedDate;
+            $(`#overlay-div3`).hide();
+
+        });
+
+
+        $(function () {
+            $(".select-schedule-box-part").click(function () {
+                $("#overlay-div4").show();
+            });
+
+            $("#overlay-div4 > .overlay-choose-schedule > button").click(function () {
+                $("#overlay-div4").hide();
+            });
+        });
+
+
+        // Add event listener to the button
+        document.getElementById("getExperienceButton3").addEventListener("click", function () {
+            // Get the value of the selected radio button
+            var selectedValue = document.querySelector('input[name="schedule_time"]:checked').value;
+
+            // Update the content of the div with the selected value
+            document.getElementById("selectedScheduleTime").textContent = selectedValue;
+            $("#overlay-div4").hide();
+        });
+
+
+        $(function () {
+            $(".select-participants-box-part").click(function () {
+                $("#overlay-div5").show();
+            });
+
+            $("#overlay-div5 > .overlay-choose-participants > button").click(function () {
+                $("#overlay-div5").hide();
+            });
+        });
+
+
+
+        function getSelectedRadioButtonText4(){
+            var input = document.getElementById("amtAdults");
+            var input2 = document.getElementById("amtChildren");
+            var input3 = document.getElementById("amtInfants");
+            var output = document.getElementById("selectedAmountOfParticipants");
+
+            // Get the value from input field
+            var value = input.value;
+            var value2 = input2.value;
+            var value3 = input3.value;
+
+            if (value2 == 0 && value3 == 0){
+                // Display the value in div
+                output.innerHTML = value + " Adults";
+            }
+            else if (value >= 1 && value2 >= 1) {
+                output.innerHTML = value + " Adults, " + value2 + " Minors";
+            }
+            else if (value >= 1 && value3 >= 1 && value2 == 0) {
+                output.innerHTML = value + " Adults, " + value3 + " Infants";
+            }
+            else if (value >= 1 && value2 >= 1 && value3 >= 1) {
+                output.innerHTML = value + " Adults, " + value2 + " Minors, " + value3 + " Infants";
+            }
+            console.log(value3)
+            $("#overlay-div5").hide();
+            
+        }
+    </script>
+}

@@ -3,8 +3,19 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSession(Options =>
+{
+    Options.IdleTimeout = System.TimeSpan.FromDays(10);
+    Options.Cookie.HttpOnly = true;
+    Options.Cookie.IsEssential = true;
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
+
+builder.Services.AddHttpContextAccessor();
 
 //Dependency Injection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -26,10 +37,22 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+            name: "parks",
+            pattern: "Parks/{id}/{action=Details}",
+            defaults: new { controller = "Park" });
 
+endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    endpoints.MapRazorPages(); // This handles Razor Pages routing
+});
+
+//app.MapRazorPages();
 app.Run();
 

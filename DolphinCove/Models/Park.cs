@@ -11,5 +11,7 @@ namespace DolphinCove.Models
 
         [Required]
         public string ParkName { get; set; }
+
+        public string? DropdownImage { get; set; }
     }
 }
