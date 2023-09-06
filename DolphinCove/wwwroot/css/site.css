@@ -56,11 +56,11 @@ body {
     left: 0;
 }
 
-.fa-map-marker, .fa-calendar, .fa-user-friends, .fa-location-arrow {
+.fa-map-marker, .fa-calendar, .fa-user-friends, .fa-location-arrow, .material-symbols-outlined, .material-icons {
     color: #39A4AC;
 }
 
-.choose-location, .choose-activity{
+.choose-location, .choose-activity {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
@@ -136,6 +136,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    width: 100%;
 }
 
 .select-location-box-part span p, .select-activity-box-part div p,
@@ -150,21 +151,24 @@ body {
     color: #B6B5B575;
 }
 
+#closeTimesBtn {
+    border: none;
+    background-color: inherit;
+}
 /*#overlay-div {
     position: fixed;
     display: none;
     width: 100%;
     height: 100%;
     top: 19%;*/
-    /*top: 0;
+/*top: 0;
     left: 0;
     right: 0;
     bottom: 0;*/
-    /*background-color: rgba(0,0,0,0.5);
+/*background-color: rgba(0,0,0,0.5);
     z-index: 2;
     cursor: pointer;
 }*/
-
 /*#overlay-div {
     position: fixed;
     top: 19%;
@@ -188,18 +192,16 @@ body {
     outline: none;
 
 }*/
-
 #overlay-div, #overlay-div2, #overlay-div3, #overlay-div4, #overlay-div5 {
     position: fixed;
-    top: 130px;
-    left: 105px;
+    top: 70px;
+    left: 85px;
     width: 325px;
     height: 100%;
-    background-color: black;
-    opacity: 0.5;
+    background-color: #ffffff;
     padding: 10px 20px 0px;
     border-radius: 5px;
-    border: 1px solid #39A4AC;
+    border: 2px solid #39A4AC;
     display: flex;
     flex-direction: column;
 }
@@ -292,5 +294,17 @@ body {
     color: #999;
     opacity: 0.5;
 }
+
+#bookNowBtn{
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    background-color: #EBE7E7;
+}
+
 
 
